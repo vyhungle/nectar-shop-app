@@ -9,6 +9,7 @@ import {useSelector} from 'react-redux';
 import BottomTab from './bottom';
 import Login from '../screens/login';
 import Register from '../screens/register';
+import Detail from '../screens/detail';
 
 export default function AppNavigator() {
   const RootStack = createStackNavigator();
@@ -19,9 +20,10 @@ export default function AppNavigator() {
         <RootStack.Navigator
           screenOptions={{
             headerShown: false,
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            // cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           }}>
           <RootStack.Screen name="BottomTab" component={BottomTab} />
+          <RootStack.Screen name="Detail" component={Detail} />
         </RootStack.Navigator>
       ) : (
         <RootStack.Navigator

@@ -2,15 +2,10 @@ import React from 'react';
 import {ActivityIndicator} from 'react-native';
 import AppNavigator from './src/navigations/appNavigator';
 import styled from 'styled-components';
+import {useSelector} from 'react-redux';
 
 const App = () => {
-  const [isLoading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
+  const {isLoading} = useSelector(s => s.products);
 
   if (isLoading) {
     return (

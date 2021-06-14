@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Catalog from './components/catalog';
 import TopTab from '../../components/customs/topTab';
+import Products from './components/products';
 
 export default function Home() {
   const auth = useSelector(s => s.auth);
@@ -12,6 +13,7 @@ export default function Home() {
     <Container>
       <TopTab title="Shop" />
       <Catalog />
+      <Products />
     </Container>
   );
 }
