@@ -18,10 +18,10 @@ export default function content({product}) {
   return (
     <View style={styles.Container}>
       <Text style={styles.TextName}>{product.name}</Text>
-      <Text style={styles.TextUnit}>{product.uint}</Text>
-      <TouchableOpacity style={styles.Heart}>
+      <Text style={styles.TextUnit}>{product.unit}</Text>
+      {/* <TouchableOpacity style={styles.Heart}>
         <AntDesign name="hearto" size={24} color={appColor.hint} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <View style={styles.BoxPrice}>
         <View style={styles.BoxQuantity}>
@@ -36,7 +36,9 @@ export default function content({product}) {
             <Entypo name="plus" size={24} color={appColor.primary} />
           </TouchableOpacity>
         </View>
-        <Text style={styles.Price}>{product.price}đ</Text>
+        <Text style={styles.Price}>
+          {product.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}đ
+        </Text>
       </View>
 
       <View style={styles.BoxDetail}>
@@ -56,7 +58,7 @@ export default function content({product}) {
             <StarRating
               disabled={true}
               maxStars={5}
-              rating={product.review.start}
+              rating={product.review.star}
               fullStarColor={appColor.star}
               starSize={20}
             />

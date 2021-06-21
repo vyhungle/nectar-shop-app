@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import IconLike from 'react-native-vector-icons/Ionicons';
+import IconLike from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
 
 const {width} = Dimensions.get('window');
@@ -22,8 +22,7 @@ const TopBar = () => {
         <Icon name="keyboard-arrow-left" size={35} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.ButtonLike}>
-        <IconLike name="md-bookmark-outline" size={25} />
-        {/* md-bookmark */}
+        <IconLike name="hearto" size={25} />
       </TouchableOpacity>
     </View>
   );

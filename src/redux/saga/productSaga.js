@@ -4,6 +4,10 @@ import {
   productsPending,
   filterSuccess,
   sortPending,
+  filterFail,
+  findPending,
+  findSuccess,
+  findFail,
 } from '../slice/productSplice';
 import axios from 'axios';
 
@@ -14,7 +18,7 @@ export function* workerSaga() {
       axios.get,
       'https:/nectar-server.herokuapp.com/api/product/all',
     );
-    const products = data.products;
+    const products = data.products.sort(() => Math.random() - 0.5);
     // dispatch a success action to the store with the new dog
     yield put({type: 'products/productsSuccess', payload: {products}});
     yield put({type: 'products/productsFail'});
@@ -25,14 +29,18 @@ export function* workerSaga() {
 }
 function* filterProduct(action) {
   const {payload} = action;
-  var res = payload.products.filter(x => x.category === payload.categoryId);
-  yield put({type: filterSuccess.type, payload: {products: res}});
+  // console.log(payload.products);
+  var res = payload.products.filter(x => x.category === payload.id);
+  if (res.length !== 0) {
+    yield put({type: filterSuccess.type, payload: {products: res}});
+  } else {
+    yield put({type: filterFail.type});
+  }
 }
 
 function* sortProduct(action) {
   const {payload} = action;
   var products = payload.products;
-  console.log(payload);
   var res;
   if (payload.type === 1) {
     res = products.slice().sort((a, b) => a.price - b.price);
@@ -41,7 +49,22 @@ function* sortProduct(action) {
   }
   yield put({type: filterSuccess.type, payload: {products: res}});
 }
+
+//search
+function* searchProduct(action) {
+  const {payload} = action;
+
+  var res = payload.products.filter(
+    x => x.name.toLowerCase().indexOf(payload.key.toLowerCase()) > -1,
+  );
+  if (res.length > 0) {
+    yield put({type: findSuccess.type, payload: {products: res}});
+  } else {
+    yield put({type: findFail.type});
+  }
+}
 function* workerFilter() {
+  yield takeEvery(findPending.type, searchProduct);
   yield takeEvery(filterPending.type, filterProduct);
   yield takeEvery(sortPending.type, sortProduct);
 }

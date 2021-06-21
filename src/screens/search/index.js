@@ -6,17 +6,22 @@ import {filterPending, sortPending} from '../../redux/slice/productSplice';
 import TopBar from '../../components/customs/TopBarMain';
 import SearchForm from './components/searchForm';
 import Categories from './components/categories';
+import SearchList from './components/searchList';
 
 export default function Search() {
   const {products, filter} = useSelector(s => s.products);
-  // console.log(filter);
   const dispatch = useDispatch();
+  const [key, setKey] = React.useState('');
+
+  const searchForKey = key => {
+    setKey(key);
+  };
 
   return (
     <View style={styles.Container}>
       <TopBar title="Tìm Kiếm Sản Phẩm" />
-      <SearchForm />
-      <Categories />
+      <SearchForm searchForKey={searchForKey} />
+      {key === '' ? <Categories /> : <SearchList />}
     </View>
   );
 }

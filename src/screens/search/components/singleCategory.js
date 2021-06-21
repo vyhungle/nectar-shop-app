@@ -8,22 +8,29 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
 
+import {filterPending} from '../../../redux/slice/productSplice';
 const {width} = Dimensions.get('window');
 const WIDTH_BOX = width / 2 - 25;
 const HEIGHT_BOX = 180;
 
 export default function SingleCategory({categories}) {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {products} = useSelector(s => s.products);
+
+  const onPressCategory = () => {
+    var id = categories._id;
+    dispatch(filterPending({products, id}));
+    navigation.navigate('Category', {
+      title: categories.name,
+    });
+  };
   return (
     <TouchableOpacity
       style={styless.Container(categories)}
-      onPress={() =>
-        navigation.navigate('Category', {
-          title: categories.name,
-          id: categories._id,
-        })
-      }>
+      onPress={() => onPressCategory()}>
       <Image style={styles.Img} source={{uri: categories.image}} />
       <Text style={styles.Name}>{categories.name}</Text>
     </TouchableOpacity>

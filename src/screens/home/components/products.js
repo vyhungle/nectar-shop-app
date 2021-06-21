@@ -22,7 +22,6 @@ export default function Products() {
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    display: 'flex',
-    alignItems: 'center',
+    padding: 15,
   },
 });
