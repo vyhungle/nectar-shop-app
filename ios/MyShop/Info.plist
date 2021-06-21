@@ -73,6 +73,14 @@
 		<string>PTSans-BoldItalic.ttf</string>
 		<string>PTSans-Italic.ttf</string>
 		<string>PTSans-Regular.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-Light.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+		<string>SVN-Gilroy Bold.otf</string>
+		<string>SVN-Gilroy Medium.otf</string>
+		<string>SVN-Gilroy Regular.otf</string>
+		<string>SVN-Gilroy Thin.otf</string>
 	</array>
 </dict>
 </plist>

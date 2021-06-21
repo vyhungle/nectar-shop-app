@@ -1,5 +1,10 @@
 import {call, put, takeEvery, all} from 'redux-saga/effects';
-import {productsPending} from '../slice/productSplice';
+import {
+  filterPending,
+  productsPending,
+  filterSuccess,
+  sortPending,
+} from '../slice/productSplice';
 import axios from 'axios';
 
 export function* workerSaga() {
@@ -18,8 +23,30 @@ export function* workerSaga() {
     console.log(error);
   }
 }
+function* filterProduct(action) {
+  const {payload} = action;
+  var res = payload.products.filter(x => x.category === payload.categoryId);
+  yield put({type: filterSuccess.type, payload: {products: res}});
+}
+
+function* sortProduct(action) {
+  const {payload} = action;
+  var products = payload.products;
+  console.log(payload);
+  var res;
+  if (payload.type === 1) {
+    res = products.slice().sort((a, b) => a.price - b.price);
+  } else {
+    res = products.slice().sort((a, b) => b.price - a.price);
+  }
+  yield put({type: filterSuccess.type, payload: {products: res}});
+}
+function* workerFilter() {
+  yield takeEvery(filterPending.type, filterProduct);
+  yield takeEvery(sortPending.type, sortProduct);
+}
 
 export default function* productSaga() {
   console.log('product saga');
-  yield all([workerSaga()]);
+  yield all([workerSaga(), workerFilter()]);
 }

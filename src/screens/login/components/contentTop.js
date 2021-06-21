@@ -1,42 +1,54 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import styled from 'styled-components';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Image,
+  ImageBackground,
+} from 'react-native';
+import {appColor} from '../../../assets/color';
 
-const contentTop = () => {
+import {VIE} from '../../../assets/language';
+
+const {width, height} = Dimensions.get('window');
+
+export default function contentTop() {
   return (
-    <Container>
-      {/* <Logo>
-                <TextLogo>Logo</TextLogo>
-            </Logo> */}
-      <Title>Hey, Welcome Back!</Title>
-    </Container>
+    <View style={styles.Container}>
+      <Image source={require('../../../assets/images/logoLogin.png')} />
+      <View style={styles.BoxBottom}>
+        <Text style={styles.Title}>{VIE.login.title}</Text>
+        <Text style={styles.Hint}>{VIE.login.body}</Text>
+      </View>
+    </View>
   );
-};
+}
 
-export default contentTop;
-
-const Container = styled.View`
-  flex-direction: column;
-`;
-const Logo = styled.View`
-  background-color: #f9bd73;
-  width: 70px;
-  height: 70px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const TextLogo = styled.Text`
-  color: white;
-  font-weight: 700;
-  font-size: 20px;
-`;
-
-const Title = styled.Text`
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  margin-top: 30px;
-`;
+const styles = StyleSheet.create({
+  Container: {
+    width: width,
+    height: height / 3,
+    zIndex: 10,
+    opacity: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  BoxBottom: {
+    width: width,
+    position: 'absolute',
+    bottom: 0,
+    paddingHorizontal: 20,
+  },
+  Title: {
+    fontSize: 24,
+    fontFamily: 'Roboto-Bold',
+  },
+  Hint: {
+    fontFamily: 'Roboto-Regular',
+    fontSize: 16,
+    color: appColor.hint,
+    marginTop: 10,
+  },
+});

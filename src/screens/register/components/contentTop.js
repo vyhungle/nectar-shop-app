@@ -1,24 +1,54 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import styled from 'styled-components';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Image,
+  ImageBackground,
+} from 'react-native';
+import {appColor} from '../../../assets/color';
 
-const contentTop = () => {
+import {VIE} from '../../../assets/language';
+
+const {width, height} = Dimensions.get('window');
+
+export default function contentTop() {
   return (
-    <Container>
-      <Title>Create an Account</Title>
-    </Container>
+    <View style={styles.Container}>
+      <Image source={require('../../../assets/images/logoLogin.png')} />
+      <View style={styles.BoxBottom}>
+        <Text style={styles.Title}>{VIE.signup.title}</Text>
+        <Text style={styles.Hint}>{VIE.signup.body}</Text>
+      </View>
+    </View>
   );
-};
+}
 
-export default contentTop;
-
-const Container = styled.View`
-  flex-direction: column;
-`;
-
-const Title = styled.Text`
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  margin-top: 30px;
-`;
+const styles = StyleSheet.create({
+  Container: {
+    width: width,
+    height: height / 3,
+    zIndex: 10,
+    opacity: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  BoxBottom: {
+    width: width,
+    position: 'absolute',
+    bottom: 0,
+    paddingHorizontal: 20,
+  },
+  Title: {
+    fontSize: 24,
+    fontFamily: 'Roboto-Bold',
+  },
+  Hint: {
+    fontFamily: 'Roboto-Regular',
+    fontSize: 16,
+    color: appColor.hint,
+    marginTop: 10,
+  },
+});

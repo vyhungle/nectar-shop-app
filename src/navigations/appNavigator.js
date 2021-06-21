@@ -10,6 +10,8 @@ import BottomTab from './bottom';
 import Login from '../screens/login';
 import Register from '../screens/register';
 import Detail from '../screens/detail';
+import Splash from '../screens/splash/splash2';
+import Category from '../screens/category';
 
 export default function AppNavigator() {
   const RootStack = createStackNavigator();
@@ -20,10 +22,11 @@ export default function AppNavigator() {
         <RootStack.Navigator
           screenOptions={{
             headerShown: false,
-            // cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           }}>
           <RootStack.Screen name="BottomTab" component={BottomTab} />
           <RootStack.Screen name="Detail" component={Detail} />
+          <RootStack.Screen name="Category" component={Category} />
         </RootStack.Navigator>
       ) : (
         <RootStack.Navigator
@@ -31,6 +34,7 @@ export default function AppNavigator() {
             headerShown: false,
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           }}>
+          <RootStack.Screen name="SplashScreen" component={Splash} />
           <RootStack.Screen name="LoginScreen" component={Login} />
           <RootStack.Screen name="RegisterScreen" component={Register} />
         </RootStack.Navigator>

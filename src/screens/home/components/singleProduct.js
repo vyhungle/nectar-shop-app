@@ -1,87 +1,117 @@
 import React from 'react';
-import {View, Text, Dimensions} from 'react-native';
-import styled from 'styled-components';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-const win = Dimensions.get('window');
-const widthImage = win.width / 2 - 4;
+import {appColor} from '../../../assets/color';
+
+const {width} = Dimensions.get('window');
+const WIDTH_BOX = width / 2 - 15;
+const WIDTH_BOX_IMAGE = width / 2 - 17;
+const WIDTH_IMAGE = width / 3;
+const HEIGHT_IMAGE = width / 3;
+
 export default function SingleProduct({product}) {
   const navigation = useNavigation();
   return (
-    <Container
+    <TouchableOpacity
+      style={styles.Container}
       onPress={() =>
         navigation.navigate('Detail', {
           product: product,
         })
       }>
-      <Image
-        source={{
-          uri: product.image[0],
-        }}
-      />
-      <BoxBody>
-        <Price>{product.price}</Price>
-        <Name>{product.name}</Name>
-      </BoxBody>
-      <IconLike>
-        <Icon name="md-bookmark-outline" size={27} />
-        {/* md-bookmark */}
-      </IconLike>
-      <IconAdd>
-        <TextIconAdd>+</TextIconAdd>
-      </IconAdd>
-    </Container>
+      <View style={styles.BoxImage}>
+        <Image
+          style={styles.Img}
+          source={{
+            uri: product.image,
+          }}
+        />
+      </View>
+
+      <View style={styles.BoxBody}>
+        <Text style={styles.TextName}>{product.name}</Text>
+        <Text style={styles.TextUnit}>{product.uint}</Text>
+      </View>
+
+      <View style={styles.BoxBottom}>
+        <Text style={styles.TextPrice}>{product.price}</Text>
+        <TouchableOpacity style={styles.ButtonAdd}>
+          <Text style={styles.TextButton}>+</Text>
+        </TouchableOpacity>
+      </View>
+    </TouchableOpacity>
   );
 }
 
-const Container = styled.TouchableOpacity`
-  width: ${win.width / 2}px;
-  height: 270px;
-  border-color: #afbac3;
-  border-width: 0.5px;
-  padding: 1px;
-`;
-
-const Image = styled.Image`
-  width: ${widthImage}px;
-  height: 200px;
-`;
-
-const BoxBody = styled.View`
-  padding: 10px;
-`;
-
-const Name = styled.Text`
-  font-family: 'PTSans-Regular';
-`;
-
-const Price = styled.Text`
-  font-family: 'PTSans-Bold';
-  font-size: 18px;
-`;
-
-const IconAdd = styled.TouchableOpacity`
-  background-color: #2c2e33;
-  border-top-left-radius: 15px;
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const TextIconAdd = styled.Text`
-  color: white;
-  font-weight: 700;
-  font-size: 20px;
-`;
-
-const IconLike = styled.TouchableOpacity`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-`;
+const styles = StyleSheet.create({
+  Container: {
+    width: WIDTH_BOX,
+    height: 250,
+    borderWidth: 1,
+    borderRadius: 18,
+    borderColor: appColor.border,
+    margin: 5,
+  },
+  BoxImage: {
+    width: WIDTH_BOX_IMAGE,
+    height: 130,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  Img: {
+    width: WIDTH_IMAGE,
+    height: HEIGHT_IMAGE,
+    resizeMode: 'center',
+    borderRadius: 18,
+  },
+  BoxBody: {
+    paddingHorizontal: 15,
+  },
+  BoxBottom: {
+    paddingHorizontal: 15,
+    position: 'absolute',
+    bottom: 25,
+    width: WIDTH_BOX,
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  ButtonAdd: {
+    backgroundColor: appColor.primary,
+    borderRadius: 18,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    right: 15,
+    width: 45.67,
+    height: 45.67,
+  },
+  TextButton: {
+    color: 'white',
+    fontSize: 29,
+    fontWeight: '700',
+  },
+  TextPrice: {
+    fontSize: 18,
+    fontFamily: 'SVN-Gilroy Bold',
+    color: 'black',
+  },
+  TextUnit: {
+    fontSize: 14,
+    fontFamily: 'SVN-Gilroy Medium',
+    color: appColor.hint,
+  },
+  TextName: {
+    fontSize: 16,
+    fontFamily: 'SVN-Gilroy Bold',
+  },
+});

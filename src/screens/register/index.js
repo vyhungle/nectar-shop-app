@@ -1,16 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import FormLogin from './components/form';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  ScrollView,
+} from 'react-native';
+import FormLogin from './components/formSignUp';
 import ContentTop from './components/contentTop';
 
 function login() {
   const LoginMain = () => {
     return (
-      <Container>
-        <ContentTop />
-        <FormLogin />
-      </Container>
+      <View style={styles.Container}>
+        <ImageBackground
+          style={styles.BG}
+          source={require('../../assets/images/bgLogin.png')}>
+          <ScrollView>
+            <ContentTop />
+            <FormLogin />
+          </ScrollView>
+        </ImageBackground>
+      </View>
     );
   };
 
@@ -24,3 +36,13 @@ const Container = styled.View`
   background-color: white;
   padding: 30px;
 `;
+
+const styles = StyleSheet.create({
+  Container: {
+    flex: 1,
+    backgroundColor: '#FBFCFC',
+  },
+  BG: {
+    flex: 1,
+  },
+});

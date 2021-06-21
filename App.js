@@ -1,28 +1,16 @@
 import React from 'react';
-import {ActivityIndicator} from 'react-native';
 import AppNavigator from './src/navigations/appNavigator';
-import styled from 'styled-components';
 import {useSelector} from 'react-redux';
+
+import Loading from './src/screens/splash/splash';
 
 const App = () => {
   const {isLoading} = useSelector(s => s.products);
 
   if (isLoading) {
-    return (
-      <ContainerLoading>
-        <ActivityIndicator size="large" color="#3AB091" />
-      </ContainerLoading>
-    );
+    return <Loading />;
   }
   return <AppNavigator />;
 };
 
 export default App;
-
-const ContainerLoading = styled.View`
-  flex: 1;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;

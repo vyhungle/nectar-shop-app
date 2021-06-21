@@ -3,6 +3,10 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
   isLoading: true,
   products: [],
+  filter: {
+    products: [],
+    isLoading: false,
+  },
 };
 
 export const ProductSplice = createSlice({
@@ -19,10 +23,27 @@ export const ProductSplice = createSlice({
     productsFail: state => {
       state.isLoading = false;
     },
+
+    filterPending: state => {
+      state.filter.isLoading = true;
+    },
+    filterSuccess: (state, {payload}) => {
+      state.filter.isLoading = false;
+      state.filter.products = payload.products;
+    },
+    sortPending: state => {
+      state.filter.isLoading = true;
+    },
   },
 });
 
-export const {productsSuccess, productsPending, productsFail} =
-  ProductSplice.actions;
+export const {
+  productsSuccess,
+  productsPending,
+  productsFail,
+  filterPending,
+  filterSuccess,
+  sortPending,
+} = ProductSplice.actions;
 
 export default ProductSplice.reducer;
