@@ -3,8 +3,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import CheckBox from 'react-native-check-box';
 import {useSelector, useDispatch} from 'react-redux';
 
-import {appColor} from '../../../assets/color';
-import {checkCategory} from '../../../redux/slice/productSplice';
+import {appColor} from '../../assets/color';
+import {checkCategory} from '../../redux/slice/productSplice';
 
 export default function ListCategories() {
   const {filter} = useSelector(s => s.products);

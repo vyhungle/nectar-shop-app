@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, ScrollView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {filterPending, sortPending} from '../../redux/slice/productSplice';
 import TopBar from '../../components/customs/TopBarMain';
 import SearchForm from './components/searchForm';
 import Categories from './components/categories';

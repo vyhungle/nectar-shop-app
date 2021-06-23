@@ -28,7 +28,7 @@ export default function bottomSheet(props) {
             backgroundColor: '#000',
           },
         }}>
-        {props.component()}
+        {props.component(refRBSheet)}
       </RBSheet>
     </View>
   );

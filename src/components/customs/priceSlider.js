@@ -2,9 +2,9 @@ import React from 'react';
 import {StyleSheet, Text, View, TextInput} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 
-import {appColor} from '../../../assets/color';
+import {appColor} from '../../assets/color';
 import {Slider} from '@miblanchard/react-native-slider';
-import {setPriceZone} from '../../../redux/slice/productSplice';
+import {setPriceZone} from '../../redux/slice/productSplice';
 
 export default function PriceSlider() {
   const {filter} = useSelector(s => s.products);

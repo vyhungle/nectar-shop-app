@@ -21,8 +21,13 @@ export default function SingleCategory({categories}) {
   const {products} = useSelector(s => s.products);
 
   const onPressCategory = () => {
-    var id = categories._id;
-    dispatch(filterPending({products, id}));
+    var value = {
+      products: products,
+      categoriesId: [categories._id],
+      isSort: 0,
+      priceZone: [0, 1000000],
+    };
+    dispatch(filterPending({value}));
     navigation.navigate('Category', {
       title: categories.name,
     });

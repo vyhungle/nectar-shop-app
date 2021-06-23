@@ -72,14 +72,16 @@ export const ProductSplice = createSlice({
     checkCategory: (state, {payload}) => {
       state.filter.isCheckList[payload.data.index] = payload.data.value;
       var flag = 0;
-      state.filter.categoriesId.map(x => {
+      var i = -1;
+      state.filter.categoriesId.map((x, index) => {
         if (x === payload.data.id) {
           flag = 1;
+          i = index;
         }
       });
       flag === 0
         ? state.filter.categoriesId.push(payload.data.id)
-        : state.filter.categoriesId.splice(payload.data.index, 1);
+        : state.filter.categoriesId.splice(i, 1);
     },
     setPriceZone: (state, {payload}) => {
       state.filter.priceZone = payload.value;

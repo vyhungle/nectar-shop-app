@@ -13,7 +13,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {appColor} from '../../../assets/color';
 import {findPending} from '../../../redux/slice/productSplice';
 import BottomSheet from '../../../components/customs/bottomSheet';
-import ContentSheet from './contentSheet';
+import ContentSheet from '../../../components/customs/contentSheetFilterMain';
 
 const {width} = Dimensions.get('window');
 

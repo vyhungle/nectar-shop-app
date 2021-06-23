@@ -3,12 +3,10 @@ import {
   filterPending,
   productsPending,
   filterSuccess,
-  sortPending,
   filterFail,
   findPending,
   findSuccess,
   findFail,
-  checkCategory,
 } from '../slice/productSplice';
 import axios from 'axios';
 
@@ -30,25 +28,35 @@ export function* workerSaga() {
 }
 function* filterProduct(action) {
   const {payload} = action;
-  // console.log(payload.products);
-  var res = payload.products.filter(x => x.category === payload.id);
-  if (res.length !== 0) {
-    yield put({type: filterSuccess.type, payload: {products: res}});
+  const categoriesId = payload.value.categoriesId;
+  const isSort = payload.value.isSort;
+  const priceZone = payload.value.priceZone;
+
+  var products = [];
+  if (categoriesId.length > 0) {
+    categoriesId.map(id => {
+      products = products.concat(
+        payload.value.products.filter(x => x.category === id),
+      );
+    });
+  } else products = payload.value.products;
+
+  products = products.filter(
+    x => x.price >= priceZone[0] && x.price <= priceZone[1],
+  );
+
+  if (isSort === 1) {
+    products = products.slice().sort((a, b) => a.price - b.price);
+  } else if (isSort === -1) {
+    products = products.slice().sort((a, b) => b.price - a.price);
+  }
+  console.log(products);
+
+  if (products.length !== 0) {
+    yield put({type: filterSuccess.type, payload: {products: products}});
   } else {
     yield put({type: filterFail.type});
   }
-}
-
-function* sortProduct(action) {
-  const {payload} = action;
-  var products = payload.products;
-  var res;
-  if (payload.type === 1) {
-    res = products.slice().sort((a, b) => a.price - b.price);
-  } else {
-    res = products.slice().sort((a, b) => b.price - a.price);
-  }
-  yield put({type: filterSuccess.type, payload: {products: res}});
 }
 
 //search
@@ -68,7 +76,6 @@ function* searchProduct(action) {
 function* workerFilter() {
   yield takeEvery(findPending.type, searchProduct);
   yield takeEvery(filterPending.type, filterProduct);
-  yield takeEvery(sortPending.type, sortProduct);
 }
 
 export default function* productSaga() {

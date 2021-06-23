@@ -3,16 +3,17 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import RadioButtonRN from 'radio-buttons-react-native';
+import {useNavigation} from '@react-navigation/native';
 
-import {appColor} from '../../../assets/color';
+import {appColor} from '../../assets/color';
 import ListCategoties from './listCategories';
 import PriceSlider from './priceSlider';
-import {setSort} from '../../../redux/slice/productSplice';
+import {filterPending, setSort} from '../../redux/slice/productSplice';
 
-export default function ContentSheet() {
+export default function ContentSheet(props) {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {filter} = useSelector(state => state.products);
-  console.log(filter.isSort);
+  const {products, filter} = useSelector(state => state.products);
   const data = [
     {
       label: 'Giá tăng dần',
@@ -25,6 +26,17 @@ export default function ContentSheet() {
   ];
   const setSortProduct = value => {
     dispatch(setSort({value}));
+  };
+  const onFilterProduct = () => {
+    var value = {
+      products: products,
+      priceZone: filter.priceZone,
+      categoriesId: filter.categoriesId,
+      isSort: filter.isSort,
+    };
+    dispatch(filterPending({value}));
+    props.current.close();
+    navigation.navigate('Filter');
   };
   return (
     <KeyboardAwareScrollView style={styles.Container}>
@@ -49,7 +61,9 @@ export default function ContentSheet() {
           />
         </View>
       </View>
-      <TouchableOpacity style={styles.ButtonContinue}>
+      <TouchableOpacity
+        style={styles.ButtonContinue}
+        onPress={() => onFilterProduct()}>
         <Text style={styles.TextButtonContinue}>Lọc sản phẩm</Text>
       </TouchableOpacity>
     </KeyboardAwareScrollView>
