@@ -16,9 +16,10 @@ export default function bottomSheet(props) {
         openDuration={props.height}
         customStyles={{
           container: {
+            // height: props.height,
             borderTopLeftRadius: 15,
             borderTopRightRadius: 15,
-            padding: 15,
+            padding: 20,
           },
           wrapper: {
             backgroundColor: 'rgba(0, 0, 0, 0.4)',

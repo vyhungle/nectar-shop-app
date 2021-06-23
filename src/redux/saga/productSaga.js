@@ -8,6 +8,7 @@ import {
   findPending,
   findSuccess,
   findFail,
+  checkCategory,
 } from '../slice/productSplice';
 import axios from 'axios';
 
@@ -63,6 +64,7 @@ function* searchProduct(action) {
     yield put({type: findFail.type});
   }
 }
+
 function* workerFilter() {
   yield takeEvery(findPending.type, searchProduct);
   yield takeEvery(filterPending.type, filterProduct);

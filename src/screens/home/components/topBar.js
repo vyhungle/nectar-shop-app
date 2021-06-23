@@ -9,7 +9,7 @@ export default function topBar() {
         source={require('../../../assets/images/logoLogin.png')}
         style={styles.Img}
       />
-      <Text style={styles.Title}>Nectar</Text>
+      <Text style={styles.Title}>Nectar Shop</Text>
     </View>
   );
 }

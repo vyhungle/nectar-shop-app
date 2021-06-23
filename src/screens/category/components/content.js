@@ -23,6 +23,7 @@ export default function Content() {
         data={filter.products}
         keyExtractor={(item, index) => index}
         renderItem={item => <SingleProduct product={item.item} />}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

@@ -29,7 +29,6 @@ export default function SearchForm(props) {
   const clearText = () => {
     myTextInput.current.clear();
     changeKey('');
-    refRBSheet.current.open();
   };
   const refRBSheet = React.useRef();
   return (
@@ -53,7 +52,9 @@ export default function SearchForm(props) {
         <AntDesign name="closecircle" size={20} color={appColor.buttonX} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.IconFilter} onPress={() => clearText()}>
+      <TouchableOpacity
+        style={styles.IconFilter}
+        onPress={() => refRBSheet.current.open()}>
         <AntDesign name="filter" size={20} color="black" />
       </TouchableOpacity>
     </View>

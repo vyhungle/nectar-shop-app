@@ -14,6 +14,7 @@ export default function Categories() {
         data={categories}
         keyExtractor={(item, index) => index}
         renderItem={item => <SingleProduct categories={item.item} />}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

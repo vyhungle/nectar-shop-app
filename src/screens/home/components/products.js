@@ -14,6 +14,7 @@ export default function Products() {
         data={products}
         keyExtractor={(item, index) => item._id}
         renderItem={item => <SingleProduct product={item.item} />}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

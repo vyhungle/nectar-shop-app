@@ -7,6 +7,10 @@ const initialState = {
     success: true,
     products: [],
     isLoading: false,
+    categoriesId: [],
+    isCheckList: [false, false, false, false, false, false],
+    isSort: 0,
+    priceZone: [0, 1000000],
   },
   find: {
     success: true,
@@ -63,6 +67,26 @@ export const ProductSplice = createSlice({
     sortPending: state => {
       state.filter.isLoading = true;
     },
+
+    //check category
+    checkCategory: (state, {payload}) => {
+      state.filter.isCheckList[payload.data.index] = payload.data.value;
+      var flag = 0;
+      state.filter.categoriesId.map(x => {
+        if (x === payload.data.id) {
+          flag = 1;
+        }
+      });
+      flag === 0
+        ? state.filter.categoriesId.push(payload.data.id)
+        : state.filter.categoriesId.splice(payload.data.index, 1);
+    },
+    setPriceZone: (state, {payload}) => {
+      state.filter.priceZone = payload.value;
+    },
+    setSort: (state, {payload}) => {
+      state.filter.isSort = payload.value;
+    },
   },
 });
 
@@ -77,6 +101,9 @@ export const {
   findPending,
   findSuccess,
   findFail,
+  checkCategory,
+  setPriceZone,
+  setSort,
 } = ProductSplice.actions;
 
 export default ProductSplice.reducer;
