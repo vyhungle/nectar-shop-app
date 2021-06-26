@@ -11,6 +11,7 @@ export default function bottomSheet(props) {
       <RBSheet
         animationType="fade"
         ref={refRBSheet}
+        openDuration={200}
         closeOnDragDown={true}
         closeOnPressMask={false}
         height={props.height}
@@ -20,6 +21,7 @@ export default function bottomSheet(props) {
             borderTopLeftRadius: 15,
             borderTopRightRadius: 15,
             padding: 20,
+            paddingBottom: 0,
           },
           wrapper: {
             backgroundColor: 'rgba(0, 0, 0, 0.4)',

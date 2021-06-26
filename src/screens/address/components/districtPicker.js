@@ -2,10 +2,10 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, FlatList} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 
-import {districtPending} from '../../../redux/slice/addressSlice';
+import {wardPending} from '../../../redux/slice/addressSlice';
 
-const CityPicker = props => {
-  const {city} = useSelector(s => s.address);
+const DistrictPicker = props => {
+  const {district} = useSelector(s => s.address);
   const dispatch = useDispatch();
 
   const render = item => {
@@ -17,12 +17,12 @@ const CityPicker = props => {
   };
   const picker = value => {
     props.current.close();
-    dispatch(districtPending({value}));
+    dispatch(wardPending({value}));
   };
 
   return (
     <FlatList
-      data={city}
+      data={district}
       keyExtractor={(item, index) => index}
       renderItem={item => render(item.item)}
       showsVerticalScrollIndicator={false}
@@ -30,7 +30,7 @@ const CityPicker = props => {
   );
 };
 
-export default CityPicker;
+export default DistrictPicker;
 
 const styles = StyleSheet.create({
   Item: {

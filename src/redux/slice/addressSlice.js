@@ -35,7 +35,8 @@ export const addressSlice = createSlice({
       state.city = payload.city;
     },
     chooseCity: (state, {payload}) => {
-      state.myAddress.city = payload.city;
+      state.myAddress.city.id = payload.value.ID;
+      state.myAddress.city.name = payload.value.Title;
     },
 
     districtPending: state => {
@@ -46,7 +47,8 @@ export const addressSlice = createSlice({
       state.district = payload.district;
     },
     chooseDistrict: (state, {payload}) => {
-      state.myAddress.district = payload.district;
+      state.myAddress.district.id = payload.value.ID;
+      state.myAddress.district.name = payload.value.Title;
     },
 
     wardPending: state => {
@@ -57,7 +59,25 @@ export const addressSlice = createSlice({
       state.ward = payload.ward;
     },
     chooseWard: (state, {payload}) => {
-      state.myAddress.ward = payload.ward;
+      state.myAddress.ward.id = payload.value.ID;
+      state.myAddress.ward.name = payload.value.Title;
+    },
+
+    clearAddress: state => {
+      state.myAddress.district = {
+        id: 0,
+        name: '',
+      };
+      state.myAddress.ward = {
+        id: 0,
+        name: '',
+      };
+    },
+    clearWard: state => {
+      state.myAddress.ward = {
+        id: 0,
+        name: '',
+      };
     },
   },
 });
@@ -72,6 +92,8 @@ export const {
   chooseCity,
   chooseDistrict,
   chooseWard,
+  clearAddress,
+  clearWard,
 } = addressSlice.actions;
 
 export default addressSlice.reducer;

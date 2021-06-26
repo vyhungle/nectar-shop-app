@@ -12,7 +12,10 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {appColor} from '../../../assets/color';
 import {cityPending} from '../../../redux/slice/addressSlice';
+import BottomSheet from '../../../components/customs/bottomSheet';
 import CityPicker from './cityPicker';
+import DistrictPicker from './districtPicker';
+import WardPicker from './wardPicker';
 
 const {width} = Dimensions.get('window');
 
@@ -21,67 +24,86 @@ export default function FormContent() {
   const dispatch = useDispatch();
 
   const selectCity = () => {
-    dispatch(cityPending());
-    refCity.current.snapTo(0);
+    refRBSheet.current.open();
+  };
+  const selectDistrict = () => {
+    refRBSheetDistrict.current.open();
+  };
+  const selectWord = () => {
+    refRBSheetWard.current.open();
   };
 
-  const refCity = React.useRef();
+  const refRBSheet = React.useRef();
+  const refRBSheetDistrict = React.useRef();
+  const refRBSheetWard = React.useRef();
   return (
-    <View style={{flex: 1}}>
-      <CityPicker refRBSheet={refCity} />
-      <View style={styles.Container}>
-        <TouchableOpacity style={styles.Item} onPress={() => selectCity()}>
-          <Text style={styles.Lable}>Tỉnh/Thành phố</Text>
-          <TextInput
-            style={styles.Field}
-            editable={false}
-            selectTextOnFocus={false}
-            value={myAddress.city.name}
-          />
-          <AntDesign
-            name="down"
-            size={18}
-            color={appColor.hint}
-            style={styles.Icon}
-          />
-        </TouchableOpacity>
+    <View style={styles.Container}>
+      <BottomSheet
+        refRBSheet={refRBSheet}
+        component={CityPicker}
+        height={500}
+      />
+      <BottomSheet
+        refRBSheet={refRBSheetDistrict}
+        component={DistrictPicker}
+        height={500}
+      />
+      <BottomSheet
+        refRBSheet={refRBSheetWard}
+        component={WardPicker}
+        height={500}
+      />
+      <TouchableOpacity style={styles.Item} onPress={() => selectCity()}>
+        <Text style={styles.Lable}>Tỉnh/Thành phố</Text>
+        <TextInput
+          style={styles.Field}
+          editable={false}
+          selectTextOnFocus={false}
+          value={myAddress.city.name}
+        />
+        <AntDesign
+          name="down"
+          size={18}
+          color={appColor.hint}
+          style={styles.Icon}
+        />
+      </TouchableOpacity>
 
-        <TouchableOpacity style={styles.Item}>
-          <Text style={styles.Lable}>Quận/Huyện</Text>
-          <TextInput
-            style={styles.Field}
-            editable={false}
-            selectTextOnFocus={false}
-            value={myAddress.city.name}
-          />
-          <AntDesign
-            name="down"
-            size={18}
-            color={appColor.hint}
-            style={styles.Icon}
-          />
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.Item} onPress={() => selectDistrict()}>
+        <Text style={styles.Lable}>Quận/Huyện</Text>
+        <TextInput
+          style={styles.Field}
+          editable={false}
+          selectTextOnFocus={false}
+          value={myAddress.district.name}
+        />
+        <AntDesign
+          name="down"
+          size={18}
+          color={appColor.hint}
+          style={styles.Icon}
+        />
+      </TouchableOpacity>
 
-        <TouchableOpacity style={styles.Item}>
-          <Text style={styles.Lable}>Phường/Xã</Text>
-          <TextInput
-            style={styles.Field}
-            editable={false}
-            selectTextOnFocus={false}
-            value={myAddress.city.name}
-          />
-          <AntDesign
-            name="down"
-            size={18}
-            color={appColor.hint}
-            style={styles.Icon}
-          />
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.Item} onPress={() => selectWord()}>
+        <Text style={styles.Lable}>Phường/Xã</Text>
+        <TextInput
+          style={styles.Field}
+          editable={false}
+          selectTextOnFocus={false}
+          value={myAddress.ward.name}
+        />
+        <AntDesign
+          name="down"
+          size={18}
+          color={appColor.hint}
+          style={styles.Icon}
+        />
+      </TouchableOpacity>
 
-        <TouchableOpacity style={styles.ButtonLogin}>
-          <Text style={styles.TextButton}>Hoàn thành</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.ButtonLogin}>
+        <Text style={styles.TextButton}>Hoàn thành</Text>
+      </TouchableOpacity>
     </View>
   );
 }
