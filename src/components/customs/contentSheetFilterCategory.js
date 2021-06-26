@@ -29,21 +29,17 @@ export default function ContentSheet(props) {
   };
   const onFilterProduct = () => {
     var value = {
-      products: products,
+      products: filter.products,
       priceZone: filter.priceZone,
-      categoriesId: filter.categoriesId,
+      categoriesId: [],
       isSort: filter.isSort,
     };
     dispatch(filterPending({value}));
     props.current.close();
-    navigation.navigate('Filter');
   };
   return (
     <KeyboardAwareScrollView style={styles.Container}>
       <View style={styles.Container}>
-        <Text style={styles.Title}>Thể loại</Text>
-        <ListCategoties />
-
         <Text style={styles.Title}>Chọn mức giá</Text>
         <PriceSlider />
 

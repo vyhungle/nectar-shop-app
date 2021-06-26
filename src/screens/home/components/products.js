@@ -2,10 +2,11 @@ import React from 'react';
 import {View, Text, FlatList, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 
-import SingleProduct from './singleProduct';
+import SingleProduct from '../../../components/customs/singleProduct';
 
 export default function Products() {
   const {products} = useSelector(s => s.products);
+
   return (
     <View style={styles.Container}>
       <FlatList

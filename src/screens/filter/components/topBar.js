@@ -1,10 +1,18 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
 import ContentSheet from '../../../components/customs/contentSheetFilterMain';
 import BottomSheet from '../../../components/customs/bottomSheet';
 
+const {height} = Dimensions.get('window');
 export default function TopBar({title}) {
   const navigation = useNavigation();
   const refRBSheet = React.useRef();
@@ -13,7 +21,7 @@ export default function TopBar({title}) {
       <BottomSheet
         refRBSheet={refRBSheet}
         component={ContentSheet}
-        height={550}
+        height={height}
       />
       <TouchableOpacity
         style={styles.IconLeft}

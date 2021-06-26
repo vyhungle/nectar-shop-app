@@ -7,14 +7,32 @@ import {
   Dimensions,
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
+import {useDispatch} from 'react-redux';
 
 import {appColor} from '../../../assets/color';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {addPending} from '../../../redux/slice/cartSlice';
 
 const {width} = Dimensions.get('window');
 
-export default function content({product}) {
+export default function Content({product}) {
+  const [quantity, setQuantity] = React.useState(1);
+  const dispatch = useDispatch();
+  const addCart = (product, quantity) => {
+    dispatch(addPending({product, quantity}));
+  };
+
+  const minus = () => {
+    if (quantity === 1) {
+      setQuantity(1);
+    } else {
+      setQuantity(quantity - 1);
+    }
+  };
+  const add = () => {
+    setQuantity(quantity + 1);
+  };
   return (
     <View style={styles.Container}>
       <Text style={styles.TextName}>{product.name}</Text>
@@ -25,20 +43,31 @@ export default function content({product}) {
 
       <View style={styles.BoxPrice}>
         <View style={styles.BoxQuantity}>
-          <TouchableOpacity style={styles.BoxIcon}>
+          <TouchableOpacity style={styles.BoxIcon} onPress={() => minus()}>
             <Entypo name="minus" size={24} color={appColor.primary} />
           </TouchableOpacity>
 
           <View style={styles.Quantity}>
-            <Text>1</Text>
+            <Text>{quantity}</Text>
           </View>
-          <TouchableOpacity style={styles.BoxIcon}>
+          <TouchableOpacity style={styles.BoxIcon} onPress={() => add()}>
             <Entypo name="plus" size={24} color={appColor.primary} />
           </TouchableOpacity>
         </View>
-        <Text style={styles.Price}>
-          {product.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}đ
-        </Text>
+
+        <View style={styles.BoxPriceChild}>
+          {product.discount > 0 && (
+            <Text style={styles.TextDiscount}>{product.price}đ</Text>
+          )}
+          <Text style={styles.Price}>
+            {product.price -
+              product.price *
+                (product.discount / 100)
+                  .toString()
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+            đ
+          </Text>
+        </View>
       </View>
 
       <View style={styles.BoxDetail}>
@@ -69,7 +98,9 @@ export default function content({product}) {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.ButtonAdd}>
+      <TouchableOpacity
+        style={styles.ButtonAdd}
+        onPress={() => addCart(product, quantity)}>
         <Text style={styles.TextButton}>Thêm Vào Giỏ</Text>
       </TouchableOpacity>
     </View>
@@ -100,12 +131,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 20,
   },
-  Price: {
-    fontSize: 24,
-    fontFamily: 'SVN-Gilroy Bold',
-    position: 'absolute',
-    right: 0,
-  },
+
   BoxQuantity: {
     display: 'flex',
     alignItems: 'center',
@@ -175,5 +201,23 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontFamily: 'SVN-Gilroy Medium',
+  },
+
+  BoxPriceChild: {
+    flexDirection: 'row',
+    display: 'flex',
+    alignItems: 'center',
+    position: 'absolute',
+    right: 0,
+  },
+  Price: {
+    fontSize: 24,
+    fontFamily: 'SVN-Gilroy Bold',
+  },
+  TextDiscount: {
+    fontSize: 16,
+    textDecorationLine: 'line-through',
+    fontFamily: 'SVN-Gilroy Medium',
+    marginRight: 10,
   },
 });

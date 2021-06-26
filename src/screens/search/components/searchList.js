@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, Dimensions, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
-import SingleProduct from '../../category/components/singleProduct';
+import SingleProduct from '../../../components/customs/singleProduct';
 
 import {appColor} from '../../../assets/color';
 
@@ -19,6 +19,7 @@ export default function SearchList() {
         data={find.products}
         keyExtractor={(item, index) => index}
         renderItem={item => <SingleProduct product={item.item} />}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

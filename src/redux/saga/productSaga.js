@@ -50,7 +50,6 @@ function* filterProduct(action) {
   } else if (isSort === -1) {
     products = products.slice().sort((a, b) => b.price - a.price);
   }
-  console.log(products);
 
   if (products.length !== 0) {
     yield put({type: filterSuccess.type, payload: {products: products}});

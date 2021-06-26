@@ -76,9 +76,10 @@ const styles = StyleSheet.create({
   },
   TextInInput: {
     left: -18,
+    fontFamily: 'SVN-Gilroy Medium',
   },
   TextZone: {
     fontFamily: 'SVN-Gilroy Medium',
-    fontSize: 14,
+    fontSize: 16,
   },
 });

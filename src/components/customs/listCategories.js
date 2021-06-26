@@ -37,8 +37,11 @@ export default function ListCategories() {
 }
 
 const styles = StyleSheet.create({
-  BoxTextInput: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  BoxInput: {
+    paddingVertical: 15,
+  },
+  TextInput: {
+    fontSize: 16,
+    fontFamily: 'SVN-Gilroy Medium',
   },
 });

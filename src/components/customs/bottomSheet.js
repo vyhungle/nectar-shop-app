@@ -2,18 +2,18 @@ import React from 'react';
 import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
-const {height} = Dimensions.get('window');
+// const {height} = Dimensions.get('window');
 
 export default function bottomSheet(props) {
   const refRBSheet = props.refRBSheet;
   return (
     <View>
       <RBSheet
+        animationType="fade"
         ref={refRBSheet}
         closeOnDragDown={true}
         closeOnPressMask={false}
-        height={height}
-        openDuration={props.height}
+        height={props.height}
         customStyles={{
           container: {
             // height: props.height,

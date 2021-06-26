@@ -1,17 +1,25 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
 import TopTab from './components/topBar';
 import Products from './components/products';
+import Content from './components/content';
+import SearchForm from './components/searchForm';
 
 export default function Home() {
   const auth = useSelector(s => s.auth);
   return (
     <View style={styles.Container}>
-      <TopTab />
-      <Products />
+      {/* <Products /> */}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{paddingBottom: 100}}>
+        <TopTab />
+        <SearchForm />
+        <Content />
+      </ScrollView>
     </View>
   );
 }

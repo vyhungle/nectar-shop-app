@@ -2,11 +2,10 @@ import React from 'react';
 import {StyleSheet, Text, View, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 
-import SingleProduct from './singleProduct';
+import SingleProduct from '../../../components/customs/singleProduct';
 
 export default function Content() {
   const {filter} = useSelector(state => state.products);
-  console.log(filter.product);
 
   if (!filter.success) {
     return (

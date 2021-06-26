@@ -13,6 +13,7 @@ import Detail from '../screens/detail';
 import Splash from '../screens/splash/splash2';
 import Category from '../screens/category';
 import Filter from '../screens/filter';
+import Address from '../screens/address';
 
 export default function AppNavigator() {
   const RootStack = createStackNavigator();
@@ -29,6 +30,7 @@ export default function AppNavigator() {
           <RootStack.Screen name="Detail" component={Detail} />
           <RootStack.Screen name="Category" component={Category} />
           <RootStack.Screen name="Filter" component={Filter} />
+          <RootStack.Screen name="Address" component={Address} />
         </RootStack.Navigator>
       ) : (
         <RootStack.Navigator

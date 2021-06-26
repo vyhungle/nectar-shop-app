@@ -20,6 +20,9 @@ export default function Index() {
       <MenuItem onPress={() => onPressLogin()}>
         <TextMenuItem>Đăng nhập</TextMenuItem>
       </MenuItem>
+      <MenuItem onPress={() => navigation.navigate('Address')}>
+        <TextMenuItem>address</TextMenuItem>
+      </MenuItem>
     </Container>
   );
 }

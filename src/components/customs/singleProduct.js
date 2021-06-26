@@ -8,8 +8,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useSelector, useDispatch} from 'react-redux';
 
-import {appColor} from '../../../assets/color';
+import {appColor} from '../../assets/color';
+import {addPending} from '../../redux/slice/cartSlice';
 
 const {width} = Dimensions.get('window');
 const WIDTH_BOX = width / 2 - 25;
@@ -20,6 +22,10 @@ const HEIGHT_IMAGE = width / 3;
 
 export default function SingleProduct({product}) {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const addCart = (product, quantity) => {
+    dispatch(addPending({product, quantity}));
+  };
   return (
     <TouchableOpacity
       style={styles.Container}
@@ -29,6 +35,11 @@ export default function SingleProduct({product}) {
         })
       }>
       <View style={styles.BoxImage}>
+        {product.discount > 0 && (
+          <View style={styles.DiscountView}>
+            <Text style={styles.DiscountText}>{product.discount}%</Text>
+          </View>
+        )}
         <Image
           style={styles.Img}
           source={{
@@ -46,9 +57,14 @@ export default function SingleProduct({product}) {
 
       <View style={styles.BoxBottom}>
         <Text style={styles.TextPrice}>
-          {product.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}đ
+          {(product.price - product.price * (product.discount / 100))
+            .toString()
+            .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+          đ
         </Text>
-        <TouchableOpacity style={styles.ButtonAdd}>
+        <TouchableOpacity
+          style={styles.ButtonAdd}
+          onPress={() => addCart(product, 1)}>
           <Text style={styles.TextButton}>+</Text>
         </TouchableOpacity>
       </View>
@@ -118,5 +134,24 @@ const styles = StyleSheet.create({
   TextName: {
     fontSize: 16,
     fontFamily: 'SVN-Gilroy Bold',
+  },
+  DiscountView: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    backgroundColor: appColor.star,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    height: 30,
+    zIndex: 10,
+    borderTopLeftRadius: 18,
+    borderBottomRightRadius: 10,
+  },
+  DiscountText: {
+    fontSize: 14,
+    fontFamily: 'SVN-Gilroy Bold',
+    color: 'white',
   },
 });

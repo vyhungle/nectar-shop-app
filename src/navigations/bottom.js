@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useSelector} from 'react-redux';
 
 import Home from '../screens/home';
 import Profile from '../screens/profile';
@@ -10,23 +11,8 @@ import Cart from '../screens/cart';
 import Search from '../screens/search';
 import {appColor} from '../assets/color';
 
-const bottom = () => {
-  // const CustomTabButton = ({children, onPress}) => (
-  //   <TouchableOpacity
-  //     style={{
-  //       width: 70,
-  //       height: 70,
-  //       borderRadius: 50,
-  //       backgroundColor: '#2C2E33',
-  //       bottom: 30,
-  //       justifyContent: 'center',
-  //       alignItems: 'center',
-  //       ...styles.shadow,
-  //     }}
-  //     onPress={onPress}>
-  //     {children}
-  //   </TouchableOpacity>
-  // );
+const Bottom = () => {
+  const {cart} = useSelector(s => s.cart);
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
@@ -45,7 +31,6 @@ const bottom = () => {
             iconName = focused ? 'shopping' : 'shopping-outline';
           }
 
-          // You can return any component that you like here!
           return (
             <IconMaterialCommunityIcons
               name={iconName}
@@ -72,16 +57,18 @@ const bottom = () => {
       <Tab.Screen
         name="Cart"
         component={Cart}
-        // options={{
-        //   // tabBarIcon: ({focused}) => (
-        //   //   <IconMaterialCommunityIcons
-        //   //     name="shopping-outline"
-        //   //     size={30}
-        //   //     color="white"
-        //   //   />
-        //   // ),
-        //   tabBarButton: props => <CustomTabButton {...props} />,
-        // }}
+        options={{
+          tabBarBadge: cart.products ? cart.products.length : 0,
+          tabBarBadgeStyle: {
+            position: 'absolute',
+            top: 15,
+            left: 11,
+            fontFamily: 'SVN-Gilroy Bold',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+        }}
       />
       <Tab.Screen name="Like" component={Cart} />
       <Tab.Screen name="Account" component={Profile} />
@@ -102,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default bottom;
+export default Bottom;

@@ -6,6 +6,7 @@ import {
   setAccessToken,
   getAccessToken,
   deleteAccessToken,
+  deleteAccessCart,
 } from '../../utils/asyncStorage';
 import setAuthToken from '../../utils/setAuthToken';
 import {
@@ -38,6 +39,7 @@ function* logoutUser() {
   console.log('logout');
   yield call(setAuthToken, null);
   yield call(deleteAccessToken);
+  yield call(deleteAccessCart);
 }
 
 export function* loginUser(action) {
