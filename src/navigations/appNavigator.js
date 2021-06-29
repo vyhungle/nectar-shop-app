@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 
+import {navigationRef} from '../redux/rootNavigation';
 import BottomTab from './bottom';
 import Login from '../screens/login';
 import Register from '../screens/register';
@@ -19,7 +20,7 @@ export default function AppNavigator() {
   const RootStack = createStackNavigator();
   const {isAuth} = useSelector(s => s.auth);
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       {isAuth ? (
         <RootStack.Navigator
           screenOptions={{

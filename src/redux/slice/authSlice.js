@@ -5,6 +5,7 @@ const initialState = {
   isAuth: false,
   errors: [],
   registerErrors: [],
+  updateErrors: [],
   user: {},
 };
 
@@ -53,6 +54,19 @@ export const LoginSlice = createSlice({
       state.registerErrors = payload.errors;
       state.user = {};
     },
+
+    updatePending: state => {
+      state.isLoading = true;
+    },
+    updateSuccess: (state, {payload}) => {
+      state.isLoading = false;
+      state.user = payload.user;
+      state.updateErrors = [];
+    },
+    updateFalse: (state, {payload}) => {
+      state.isLoading = false;
+      state.updateErrors = payload.errors;
+    },
   },
 });
 
@@ -65,6 +79,9 @@ export const {
   registerSuccess,
   registerFail,
   logout,
+  updatePending,
+  updateSuccess,
+  updateFalse,
 } = LoginSlice.actions;
 
 export default LoginSlice.reducer;

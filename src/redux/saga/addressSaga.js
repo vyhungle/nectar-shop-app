@@ -41,7 +41,6 @@ function* getWard(action) {
     axios.get,
     `https://thongtindoanhnghiep.co/api/district/${payload.value.ID}/ward`,
   );
-  console.log(data);
   yield put({type: wardSuccess.type, payload: {ward: data}});
   yield put({type: chooseDistrict.type, payload: {value: payload.value}});
   yield put({type: clearWard.type});

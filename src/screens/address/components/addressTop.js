@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 20,
   },
   IMG: {
     width: 174,

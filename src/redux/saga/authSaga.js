@@ -1,6 +1,6 @@
 import {all, call, put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
+import * as RootNavigation from '../rootNavigation';
 
 import {
   setAccessToken,
@@ -17,22 +17,26 @@ import {
   registerSuccess,
   registerFail,
   logout,
+  updateSuccess,
+  updateFalse,
+  updatePending,
 } from '../slice/authSlice';
 
 function* getUser() {
   console.log('get user');
-  var user = null;
   var token = yield call(getAccessToken);
   if (token) {
-    const decodedToken = jwtDecode(token);
-    user = decodedToken;
-    yield call(setAccessToken, token);
-  }
-  if (user !== null) {
-    yield put({type: authUser.type, payload: {user: user}});
-  } else {
-    yield call(setAuthToken, null);
-  }
+    yield call(setAuthToken, token);
+
+    var {data} = yield call(
+      axios.get,
+      'https:/nectar-server.herokuapp.com/api/auth/user',
+    );
+    if (data.success) {
+      var user = data.user;
+      yield put({type: authUser.type, payload: {user: user}});
+    }
+  } else yield call(setAuthToken, null);
 }
 
 function* logoutUser() {
@@ -53,7 +57,6 @@ export function* loginUser(action) {
     if (data.success) {
       yield put({type: loginSuccess.type});
       yield call(setAccessToken, data.token);
-      // setAccessToken(data.token);
       yield call(getUser);
     } else {
       yield put({type: loginFail.type, payload: {errors: data.errors}});
@@ -86,17 +89,26 @@ export function* registerUser(action) {
   }
 }
 
-function* workerLogin() {
-  yield takeEvery(loginPending.type, loginUser);
+function* updateProfile(action) {
+  const {payload} = action;
+  const {data} = yield call(
+    axios.put,
+    'https:/nectar-server.herokuapp.com/api/auth/editProfile',
+    payload.values,
+  );
+  if (data.success) {
+    yield put({type: updateSuccess.type, payload: {user: data.user}});
+    RootNavigation.goBack();
+  } else yield put({type: updateFalse.type, payload: {errors: data.errors}});
 }
 
-function* workerRegister() {
+function* workerProductSaga() {
+  yield takeEvery(loginPending.type, loginUser);
   yield takeEvery(loginPending.type, registerUser);
-}
-function* workerLogout() {
   yield takeEvery(logout.type, logoutUser);
+  yield takeEvery(updatePending.type, updateProfile);
 }
 
 export default function* productSaga() {
-  yield all([getUser(), workerLogin(), workerRegister(), workerLogout()]);
+  yield all([getUser(), workerProductSaga()]);
 }

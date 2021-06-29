@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
+  isLoading: false,
   isLoadingCity: false,
   isLoadingDistrict: false,
   isLoadingWard: false,

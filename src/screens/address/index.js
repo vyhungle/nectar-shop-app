@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 
 import AddressTop from './components/addressTop';
 import TopBar from './components/topBar';
@@ -8,8 +8,10 @@ export default function index() {
   return (
     <View style={styles.Container}>
       <TopBar />
-      <AddressTop />
-      <Content />
+      <ScrollView contentContainerStyle={{paddingBottom: 20}}>
+        <AddressTop />
+        <Content />
+      </ScrollView>
     </View>
   );
 }
