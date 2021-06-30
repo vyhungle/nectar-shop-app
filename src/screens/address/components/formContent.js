@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   },
   Item: {
     width: width - 40,
-    borderBottomColor: appColor.hint,
+    borderBottomColor: appColor.border,
     borderBottomWidth: 0.6,
     marginBottom: 30,
   },

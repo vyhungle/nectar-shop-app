@@ -39,7 +39,6 @@ function* getUser() {
 }
 
 function* logoutUser() {
-  console.log('logout');
   yield call(setAuthToken, null);
   yield call(deleteAccessToken);
   yield call(deleteAccessCart);

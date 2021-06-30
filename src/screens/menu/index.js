@@ -5,7 +5,8 @@ import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 
 import {logout} from '../../redux/slice/authSlice';
-import TopTab from '../../components/customs/topTab';
+import Info from './components/info';
+import ListItemMenu from './components/listItemMenu';
 
 export default function Index() {
   const navigation = useNavigation();
@@ -16,13 +17,8 @@ export default function Index() {
   };
   return (
     <Container>
-      <TopTab title="Thông tin cá nhân" />
-      <MenuItem onPress={() => onPressLogin()}>
-        <TextMenuItem>Đăng nhập</TextMenuItem>
-      </MenuItem>
-      <MenuItem onPress={() => navigation.navigate('Address')}>
-        <TextMenuItem>address</TextMenuItem>
-      </MenuItem>
+      <Info />
+      <ListItemMenu />
     </Container>
   );
 }

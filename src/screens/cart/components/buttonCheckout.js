@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     left: 20,
-    bottom: 90,
+    bottom: 100,
   },
   TextButton: {
     fontSize: 16,

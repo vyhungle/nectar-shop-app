@@ -5,10 +5,9 @@ import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommun
 import {useSelector} from 'react-redux';
 
 import Home from '../screens/home';
-import Profile from '../screens/profile';
+import Profile from '../screens/menu';
 import Cart from '../screens/cart';
 import Search from '../screens/search';
-import OrderAccepted from '../screens/payment/components/orderAccepted';
 import {appColor} from '../assets/color';
 
 const Bottom = () => {
