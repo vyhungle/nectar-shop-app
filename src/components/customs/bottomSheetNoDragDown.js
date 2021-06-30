@@ -12,22 +12,19 @@ export default function bottomSheet(props) {
         animationType="none"
         ref={refRBSheet}
         openDuration={200}
-        closeOnDragDown={true}
+        closeOnDragDown={false}
         closeOnPressMask={true}
         height={props.height}
         customStyles={{
           container: {
             // height: props.height,
-            borderTopLeftRadius: 15,
-            borderTopRightRadius: 15,
-            padding: 20,
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            // padding: 20,
             paddingBottom: 0,
           },
           wrapper: {
             backgroundColor: 'rgba(0, 0, 0, 0.4)',
-          },
-          draggableIcon: {
-            backgroundColor: '#000',
           },
         }}>
         {props.component(refRBSheet)}

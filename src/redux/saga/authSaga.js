@@ -1,6 +1,7 @@
 import {all, call, put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 import * as RootNavigation from '../rootNavigation';
+import {apiUrl} from '../constants';
 
 import {
   setAccessToken,
@@ -21,6 +22,7 @@ import {
   updateFalse,
   updatePending,
 } from '../slice/authSlice';
+import {getCartSaga} from './cartSaga';
 
 function* getUser() {
   console.log('get user');
@@ -28,10 +30,7 @@ function* getUser() {
   if (token) {
     yield call(setAuthToken, token);
 
-    var {data} = yield call(
-      axios.get,
-      'https:/nectar-server.herokuapp.com/api/auth/user',
-    );
+    var {data} = yield call(axios.get, `${apiUrl}/auth/user`);
     if (data.success) {
       var user = data.user;
       yield put({type: authUser.type, payload: {user: user}});
@@ -44,6 +43,7 @@ function* logoutUser() {
   yield call(setAuthToken, null);
   yield call(deleteAccessToken);
   yield call(deleteAccessCart);
+  yield call(getCartSaga);
 }
 
 export function* loginUser(action) {
@@ -51,7 +51,7 @@ export function* loginUser(action) {
     const {payload} = action;
     const {data} = yield call(
       axios.post,
-      'https:/nectar-server.herokuapp.com/api/auth/login',
+      `${apiUrl}/auth/login`,
       payload.values,
     );
     if (data.success) {
@@ -72,7 +72,7 @@ export function* registerUser(action) {
     const {payload} = action;
     const {data} = yield call(
       axios.post,
-      'https:/nectar-server.herokuapp.com/api/auth/register',
+      `${apiUrl}/auth/register`,
       payload.values,
     );
     if (data.success) {
@@ -93,7 +93,8 @@ function* updateProfile(action) {
   const {payload} = action;
   const {data} = yield call(
     axios.put,
-    'https:/nectar-server.herokuapp.com/api/auth/editProfile',
+    `${apiUrl}/auth/editProfile`,
+
     payload.values,
   );
   if (data.success) {

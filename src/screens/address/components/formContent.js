@@ -73,7 +73,6 @@ export default function FormContent() {
         }}
         onSubmit={values => {
           values.address = address();
-          console.log(values);
           dispatch(updatePending({values}));
         }}>
         {formProps => (

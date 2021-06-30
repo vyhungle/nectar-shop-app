@@ -1,16 +1,25 @@
 import {all, takeEvery, put, call} from 'redux-saga/effects';
 import axios from 'axios';
-import {getAccessCart, setAccessCart} from '../../utils/asyncStorage';
+import {
+  getAccessCart,
+  setAccessCart,
+  deleteAccessCart,
+} from '../../utils/asyncStorage';
+import {apiUrl} from '../constants';
+import * as RootNavigation from '../rootNavigation';
 import {
   addPending,
   addToCart,
   clearItemPending,
   getCart,
+  paymentFail,
+  paymentPending,
+  paymentSuccess,
   removePending,
   removeToCard,
 } from '../slice/cartSlice';
 
-function* getCartSaga() {
+export function* getCartSaga() {
   var cart = yield call(getAccessCart);
   console.log(cart);
   if (cart) {
@@ -93,10 +102,38 @@ function* removeItemSaga(action) {
   yield put({type: removeToCard.type, payload: {cart: cart}});
 }
 
+function* paymentSaga() {
+  const cart = yield call(getAccessCart);
+  let products = [];
+  cart.products.map(x => {
+    let product = {
+      product: x.product._id,
+      quantity: x.quantity,
+    };
+    products.push(product);
+  });
+  const values = {
+    products: products,
+    total: cart.total,
+  };
+
+  let {data} = yield call(axios.post, `${apiUrl}/cart/addBill`, values);
+
+  if (data.success) {
+    yield call(deleteAccessCart);
+    yield put({type: paymentSuccess.type});
+    RootNavigation.navigate('OrderAccepted');
+  } else {
+    yield put({type: paymentFail.type, payload: {error: data.error}});
+    RootNavigation.navigateRoute('OrderFail', {error: data.error});
+  }
+}
+
 function* cartWorker() {
   yield takeEvery(addPending.type, addToCartSaga);
   yield takeEvery(removePending.type, minusItemSaga);
   yield takeEvery(clearItemPending.type, removeItemSaga);
+  yield takeEvery(paymentPending.type, paymentSaga);
 }
 export default function* cartSaga() {
   console.log('cartSaga active');

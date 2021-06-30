@@ -1,7 +1,6 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons';
 import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
 
@@ -9,6 +8,7 @@ import Home from '../screens/home';
 import Profile from '../screens/profile';
 import Cart from '../screens/cart';
 import Search from '../screens/search';
+import OrderAccepted from '../screens/payment/components/orderAccepted';
 import {appColor} from '../assets/color';
 
 const Bottom = () => {

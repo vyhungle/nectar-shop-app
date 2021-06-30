@@ -5,24 +5,38 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 
 import {appColor} from '../../../assets/color';
+import BottomSheet from '../../../components/customs/bottomSheetNoDragDown';
+import PaymentContent from '../../payment/components/paymentContent';
 
 const {width} = Dimensions.get('window');
 
 export default function ButtonCheckout() {
   const {cart} = useSelector(s => s.cart);
+
+  const refRBSheet = React.useRef();
   return (
-    <TouchableOpacity style={styles.Container}>
-      <Text style={styles.TextButton}>Thanh toán</Text>
-      <View style={styles.BoxPrice}>
-        <Text style={styles.Price}>
-          {cart.total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}đ
-        </Text>
-      </View>
-    </TouchableOpacity>
+    <View>
+      <BottomSheet
+        refRBSheet={refRBSheet}
+        component={PaymentContent}
+        height={400}
+      />
+      <TouchableOpacity
+        style={styles.Container}
+        onPress={() => refRBSheet.current.open()}>
+        <Text style={styles.TextButton}>Thanh toán</Text>
+        <View style={styles.BoxPrice}>
+          <Text style={styles.Price}>
+            {cart.total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}đ
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 }
 

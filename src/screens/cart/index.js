@@ -1,14 +1,19 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {appColor} from '../../assets/color';
+import {useSelector} from 'react-redux';
 
 import TopTab from '../../components/customs/TopBarMain';
 import ListItem from './components/listItem';
 import ButtonCheckout from './components/buttonCheckout';
+import Loading from '../../components/customs/loadingCover';
 
-export default function index() {
+export default function Index() {
+  const {isPayment} = useSelector(s => s.cart);
+
   return (
     <View style={styles.Container}>
+      {isPayment && <Loading />}
       <TopTab title="Giỏ hàng" />
       <View style={styles.Container}>
         <ListItem />

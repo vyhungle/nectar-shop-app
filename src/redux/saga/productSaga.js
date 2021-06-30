@@ -9,14 +9,12 @@ import {
   findFail,
 } from '../slice/productSplice';
 import axios from 'axios';
+import {apiUrl} from '../constants';
 
 export function* workerSaga() {
   try {
     yield put({type: productsPending.type});
-    const {data} = yield call(
-      axios.get,
-      'https:/nectar-server.herokuapp.com/api/product/all',
-    );
+    const {data} = yield call(axios.get, `${apiUrl}/product/all`);
     const products = data.products.sort(() => Math.random() - 0.5);
     // dispatch a success action to the store with the new dog
     yield put({type: 'products/productsSuccess', payload: {products}});

@@ -36,7 +36,6 @@ function* getDistrict(action) {
 
 function* getWard(action) {
   const {payload} = action;
-  console.log(payload);
   const {data} = yield call(
     axios.get,
     `https://thongtindoanhnghiep.co/api/district/${payload.value.ID}/ward`,

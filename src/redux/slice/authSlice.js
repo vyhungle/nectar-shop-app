@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   isLoading: false,
+  isAuthLoading: true,
   isAuth: false,
   errors: [],
   registerErrors: [],
@@ -16,6 +17,7 @@ export const LoginSlice = createSlice({
     authUser: (state, {payload}) => {
       state.user = payload.user;
       state.isAuth = true;
+      state.isAuthLoading = false;
     },
     //logout
     logout: state => {
