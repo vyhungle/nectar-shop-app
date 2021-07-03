@@ -10,6 +10,8 @@ import * as RootNavigation from '../rootNavigation';
 import {
   addPending,
   addToCart,
+  billsPending,
+  billsSuccess,
   clearItemPending,
   getCart,
   paymentFail,
@@ -21,7 +23,6 @@ import {
 
 export function* getCartSaga() {
   var cart = yield call(getAccessCart);
-  console.log(cart);
   if (cart) {
     yield put({type: getCart.type, payload: {cart: cart}});
   } else {
@@ -122,18 +123,25 @@ function* paymentSaga() {
   if (data.success) {
     yield call(deleteAccessCart);
     yield put({type: paymentSuccess.type});
+    yield put({type: billsPending.type});
     RootNavigation.navigate('OrderAccepted');
   } else {
     yield put({type: paymentFail.type, payload: {error: data.error}});
     RootNavigation.navigateRoute('OrderFail', {error: data.error});
   }
 }
-
+function* getBillSaga() {
+  const {data} = yield call(axios.get, `${apiUrl}/cart/bills`);
+  if (data) {
+    yield put({type: billsSuccess.type, payload: {bills: data.bills}});
+  }
+}
 function* cartWorker() {
   yield takeEvery(addPending.type, addToCartSaga);
   yield takeEvery(removePending.type, minusItemSaga);
   yield takeEvery(clearItemPending.type, removeItemSaga);
   yield takeEvery(paymentPending.type, paymentSaga);
+  yield takeEvery(billsPending.type, getBillSaga);
 }
 export default function* cartSaga() {
   console.log('cartSaga active');

@@ -15,6 +15,7 @@ export const LoginSlice = createSlice({
   initialState,
   reducers: {
     authUser: (state, {payload}) => {
+      console.log('get user success');
       state.user = payload.user;
       state.isAuth = true;
       state.isAuthLoading = false;

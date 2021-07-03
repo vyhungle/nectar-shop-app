@@ -19,6 +19,10 @@ export default function PaymentContent(props) {
     dispatch(paymentPending());
     props.current.close();
   };
+  const total = e => {
+    const parse = e.total;
+    return parseInt(parse, 10);
+  };
 
   return (
     <View style={styles.Container}>
@@ -39,7 +43,10 @@ export default function PaymentContent(props) {
         <TouchableOpacity style={styles.Item}>
           <Text style={styles.TextItem}>Tổng tiền</Text>
           <Text style={styles.TextRight}>
-            {cart.total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}đ
+            {total(cart)
+              .toString()
+              .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+            đ
           </Text>
           <AntDesign name="right" size={18} style={styles.Icon} />
         </TouchableOpacity>

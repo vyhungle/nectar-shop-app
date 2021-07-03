@@ -24,7 +24,9 @@ export default function ListItemMenu() {
   const dispatch = useDispatch();
   return (
     <View style={styles.Container}>
-      <TouchableOpacity style={styles.BoxItem}>
+      <TouchableOpacity
+        style={styles.BoxItem}
+        onPress={() => navigation.navigate('Bills')}>
         <View style={styles.ItemLeft}>
           <OrderIcon />
           <Text style={styles.TextItem}>Đơn hàng</Text>

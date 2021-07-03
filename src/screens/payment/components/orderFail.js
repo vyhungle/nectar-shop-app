@@ -11,6 +11,7 @@ import {
 import {useNavigation, useRoute} from '@react-navigation/native';
 
 import {appColor} from '../../../assets/color';
+import OrderIcon from '../../../assets/images/orderFail.svg';
 
 const {width} = Dimensions.get('window');
 
@@ -21,10 +22,7 @@ export default function OrderFail() {
   return (
     <View style={styles.Container}>
       <View style={styles.Top}>
-        <Image
-          style={styles.ImageTop}
-          source={require('../../../assets/images/orderFail.png')}
-        />
+        <OrderIcon width={270} height={240} />
       </View>
 
       <View style={styles.Body}>
@@ -63,7 +61,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: width,
-    height: 400,
+    height: 320,
   },
   ImageTop: {
     width: 270,

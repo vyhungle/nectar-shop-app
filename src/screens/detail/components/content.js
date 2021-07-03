@@ -33,6 +33,15 @@ export default function Content({product}) {
   const add = () => {
     setQuantity(quantity + 1);
   };
+
+  const discount = () => {
+    const parse = product.price;
+    return parseInt(parse, 10);
+  };
+  const price = () => {
+    const parse = product.price - product.price * (product.discount / 100);
+    return parseInt(parse, 10);
+  };
   return (
     <View style={styles.Container}>
       <Text style={styles.TextName}>{product.name}</Text>
@@ -57,14 +66,17 @@ export default function Content({product}) {
 
         <View style={styles.BoxPriceChild}>
           {product.discount > 0 && (
-            <Text style={styles.TextDiscount}>{product.price}đ</Text>
+            <Text style={styles.TextDiscount}>
+              {discount()
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+              đ
+            </Text>
           )}
           <Text style={styles.Price}>
-            {product.price -
-              product.price *
-                (product.discount / 100)
-                  .toString()
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+            {price()
+              .toString()
+              .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
             đ
           </Text>
         </View>

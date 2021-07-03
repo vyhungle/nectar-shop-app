@@ -39,6 +39,13 @@ export default function SingleItem({item}) {
   const clear = product => {
     dispatch(clearItemPending({product}));
   };
+
+  const price = () => {
+    const parse =
+      (product.price - product.price * (product.discount / 100)) *
+      item.quantity;
+    return parseInt(parse, 10);
+  };
   return (
     <TouchableOpacity
       style={styles.Container}
@@ -79,10 +86,7 @@ export default function SingleItem({item}) {
           </TouchableOpacity>
 
           <Text style={styles.Price}>
-            {(
-              (product.price - product.price * (product.discount / 100)) *
-              item.quantity
-            )
+            {price()
               .toString()
               .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
             đ

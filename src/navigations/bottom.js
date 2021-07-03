@@ -29,7 +29,6 @@ const Bottom = () => {
           } else {
             iconName = focused ? 'shopping' : 'shopping-outline';
           }
-
           return (
             <IconMaterialCommunityIcons
               name={iconName}

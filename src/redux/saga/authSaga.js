@@ -23,9 +23,9 @@ import {
   updatePending,
 } from '../slice/authSlice';
 import {getCartSaga} from './cartSaga';
+import {billsPending} from '../slice/cartSlice';
 
 function* getUser() {
-  console.log('get user');
   var token = yield call(getAccessToken);
   if (token) {
     yield call(setAuthToken, token);
@@ -34,6 +34,7 @@ function* getUser() {
     if (data.success) {
       var user = data.user;
       yield put({type: authUser.type, payload: {user: user}});
+      yield put({type: billsPending.type});
     }
   } else yield call(setAuthToken, null);
 }

@@ -26,6 +26,11 @@ export default function SingleProduct({product}) {
   const addCart = (product, quantity) => {
     dispatch(addPending({product, quantity}));
   };
+
+  const price = () => {
+    const parse = product.price - product.price * (product.discount / 100);
+    return parseInt(parse, 10);
+  };
   return (
     <TouchableOpacity
       style={styles.Container}
@@ -57,7 +62,7 @@ export default function SingleProduct({product}) {
 
       <View style={styles.BoxBottom}>
         <Text style={styles.TextPrice}>
-          {(product.price - product.price * (product.discount / 100))
+          {price()
             .toString()
             .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
           đ

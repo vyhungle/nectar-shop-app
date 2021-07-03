@@ -11,21 +11,20 @@ import {
 import {useNavigation} from '@react-navigation/native';
 
 import {appColor} from '../../../assets/color';
+import OrderIcon from '../../../assets/images/orderSuccess.svg';
 
 const {width} = Dimensions.get('window');
 
 export default function OrderAccepted() {
   const navigation = useNavigation();
+
   return (
     <View style={styles.Container}>
       <ImageBackground
         style={styles.BG}
         source={require('../../../assets/images/bgLogin.png')}>
         <View style={styles.Top}>
-          <Image
-            style={styles.ImageTop}
-            source={require('../../../assets/images/oder.png')}
-          />
+          <OrderIcon width={270} height={240} />
         </View>
 
         <View style={styles.Body}>
@@ -39,7 +38,9 @@ export default function OrderAccepted() {
         </View>
 
         <View style={styles.BoxBottom}>
-          <TouchableOpacity style={styles.Button}>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => navigation.navigate('Bills')}>
             <Text style={styles.TextButton}>Kiểm tra đơn hàng</Text>
           </TouchableOpacity>
 
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: width,
-    height: 400,
+    height: 320,
   },
   ImageTop: {
     width: 270,

@@ -1,8 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
-
-// const {height} = Dimensions.get('window');
 
 export default function bottomSheet(props) {
   const refRBSheet = props.refRBSheet;

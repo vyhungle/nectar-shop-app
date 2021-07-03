@@ -4,10 +4,12 @@ const initialState = {
   isPayment: false,
   isAdd: false,
   isRemove: false,
+  isBills: false,
   cart: {
     products: [],
     total: 0,
   },
+  bills: [],
   error: '',
 };
 
@@ -16,6 +18,7 @@ export const CartSlice = createSlice({
   initialState,
   reducers: {
     getCart: (state, {payload}) => {
+      console.log('get cart success');
       state.cart = payload.cart;
     },
 
@@ -53,6 +56,14 @@ export const CartSlice = createSlice({
       state.isPayment = false;
       state.error = payload.error;
     },
+
+    billsPending: state => {
+      state.isBills = true;
+    },
+    billsSuccess: (state, {payload}) => {
+      state.isBills = false;
+      state.bills = payload.bills;
+    },
   },
 });
 
@@ -66,5 +77,7 @@ export const {
   paymentPending,
   paymentSuccess,
   paymentFail,
+  billsPending,
+  billsSuccess,
 } = CartSlice.actions;
 export default CartSlice.reducer;

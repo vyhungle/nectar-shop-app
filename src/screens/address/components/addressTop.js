@@ -1,13 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 
+import LocationImage from '../../../assets/images/location.svg';
+
 export default function addressTop() {
   return (
     <View style={styles.Container}>
-      <Image
-        style={styles.IMG}
-        source={require('../../../assets/images/address.png')}
-      />
+      <LocationImage width={174} height={135} />
       <Text style={styles.Title}>Chọn địa điểm nhận hàng của bạn</Text>
     </View>
   );
