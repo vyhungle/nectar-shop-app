@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import SearchIcon from '../../../assets/images/search.svg';
 
 import {appColor} from '../../../assets/color';
 
@@ -22,7 +23,7 @@ export default function SearchForm(props) {
   return (
     <View style={styles.Container}>
       <View style={styles.IconField}>
-        <AntDesign name="search1" size={20} />
+        <SearchIcon />
       </View>
       <TextInput
         style={styles.Field}

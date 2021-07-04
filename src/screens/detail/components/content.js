@@ -7,16 +7,20 @@ import {
   Dimensions,
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
 import {appColor} from '../../../assets/color';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {addPending} from '../../../redux/slice/cartSlice';
+import {singleProduct} from '../../../redux/slice/productSplice';
 
 const {width} = Dimensions.get('window');
 
-export default function Content({product}) {
+export default function Content() {
+  const {product} = useSelector(s => s.products);
+  const navigation = useNavigation();
   const [quantity, setQuantity] = React.useState(1);
   const dispatch = useDispatch();
   const addCart = (product, quantity) => {
@@ -42,13 +46,16 @@ export default function Content({product}) {
     const parse = product.price - product.price * (product.discount / 100);
     return parseInt(parse, 10);
   };
+
+  const goReview = () => {
+    let id = product._id;
+    navigation.navigate('Review');
+    dispatch(singleProduct({id}));
+  };
   return (
     <View style={styles.Container}>
       <Text style={styles.TextName}>{product.name}</Text>
       <Text style={styles.TextUnit}>{product.unit}</Text>
-      {/* <TouchableOpacity style={styles.Heart}>
-        <AntDesign name="hearto" size={24} color={appColor.hint} />
-      </TouchableOpacity> */}
 
       <View style={styles.BoxPrice}>
         <View style={styles.BoxQuantity}>
@@ -93,8 +100,13 @@ export default function Content({product}) {
       </View>
 
       <View style={styles.BoxDetail}>
-        <TouchableOpacity style={styles.BoxNav}>
-          <Text style={styles.TextNav}>Đánh giá</Text>
+        <TouchableOpacity style={styles.BoxNav} onPress={() => goReview()}>
+          <Text style={styles.TextNav}>
+            Đánh giá: {product.review.star}/
+            {product.review.contents.length
+              ? product.review.contents.length
+              : 0}
+          </Text>
           <View style={styles.StartNav}>
             <StarRating
               disabled={true}

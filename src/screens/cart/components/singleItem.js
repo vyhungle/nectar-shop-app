@@ -18,6 +18,7 @@ import {
   clearItemPending,
   removePending,
 } from '../../../redux/slice/cartSlice';
+import {singleProduct} from '../../../redux/slice/productSplice';
 
 const {width} = Dimensions.get('window');
 const WIDTH_IMAGE = 80;
@@ -46,14 +47,14 @@ export default function SingleItem({item}) {
       item.quantity;
     return parseInt(parse, 10);
   };
+
+  const goDetail = () => {
+    var id = product._id;
+    dispatch(singleProduct({id}));
+    navigation.navigate('Detail');
+  };
   return (
-    <TouchableOpacity
-      style={styles.Container}
-      onPress={() =>
-        navigation.navigate('Detail', {
-          product: product,
-        })
-      }>
+    <TouchableOpacity style={styles.Container} onPress={() => goDetail()}>
       <View style={styles.BoxItem}>
         <Image source={{uri: product.image}} style={styles.IMG} />
 

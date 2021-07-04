@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import {appColor} from '../../assets/color';
+import IconLogo from '../../assets/images/iconLogWhite.svg';
 
 export default function splash2({navigation}) {
   return (
@@ -18,7 +19,7 @@ export default function splash2({navigation}) {
         source={require('../../assets/images/bgSplash.png')}>
         <View style={{flex: 1}} />
         <View style={styles.Main}>
-          <Image source={require('../../assets/images/iconLogo.png')} />
+          <IconLogo />
           <View style={styles.BoxTitle}>
             <Text style={styles.Title}>Welcome</Text>
             <Text style={styles.Title}>to our store</Text>

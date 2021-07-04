@@ -14,6 +14,8 @@ import {appColor} from '../../../assets/color';
 import {findPending} from '../../../redux/slice/productSplice';
 import BottomSheet from '../../../components/customs/bottomSheet';
 import ContentSheet from '../../../components/customs/contentSheetFilterMain';
+import FilterIcon from '../../../assets/images/filter.svg';
+import SearchIcon from '../../../assets/images/search.svg';
 
 const {width, height} = Dimensions.get('window');
 
@@ -39,7 +41,7 @@ export default function SearchForm(props) {
         height={height}
       />
       <View style={styles.IconField}>
-        <AntDesign name="search1" size={20} />
+        <SearchIcon />
       </View>
       <TextInput
         style={styles.Field}
@@ -55,7 +57,7 @@ export default function SearchForm(props) {
       <TouchableOpacity
         style={styles.IconFilter}
         onPress={() => refRBSheet.current.open()}>
-        <AntDesign name="filter" size={20} color="black" />
+        <FilterIcon />
       </TouchableOpacity>
     </View>
   );

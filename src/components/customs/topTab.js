@@ -1,9 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
 import ContentSheet from './contentSheetFilterCategory';
 import BottomSheet from './bottomSheet';
+import BackIcon from '../../assets/images/left.svg';
+import FilterIcon from '../../assets/images/filter.svg';
 
 export default function TopBar({title}) {
   const navigation = useNavigation();
@@ -18,13 +19,13 @@ export default function TopBar({title}) {
       <TouchableOpacity
         style={styles.IconLeft}
         onPress={() => navigation.goBack()}>
-        <AntDesign name="left" size={25} />
+        <BackIcon />
       </TouchableOpacity>
       <Text style={styles.Title}>{title}</Text>
       <TouchableOpacity
         style={styles.IconRight}
         onPress={() => refRBSheet.current.open()}>
-        <AntDesign name="filter" size={25} />
+        <FilterIcon />
       </TouchableOpacity>
     </View>
   );
@@ -46,10 +47,20 @@ const styles = StyleSheet.create({
   },
   IconLeft: {
     position: 'absolute',
-    left: 20,
+    left: 0,
+    height: 60,
+    width: 60,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   IconRight: {
     position: 'absolute',
-    right: 20,
+    right: 0,
+    height: 60,
+    width: 60,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

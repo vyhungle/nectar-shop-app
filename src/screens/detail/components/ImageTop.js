@@ -1,12 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View, Dimensions, Image} from 'react-native';
+import {useSelector} from 'react-redux';
 
 const {width, height} = Dimensions.get('window');
 const WIDTH_IMAGE = width / 1.5;
 const HEIGHT_IMAGE = height / 3.5;
 const HEIGHT_BOX_IMAGE = height / 2.5;
 
-export default function ImageTop({product}) {
+export default function ImageTop() {
+  const {product} = useSelector(s => s.products);
   return (
     <View style={styles.Container}>
       <View style={styles.BoxImage}>

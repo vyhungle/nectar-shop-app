@@ -3,6 +3,7 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
   isLoading: true,
   products: [],
+  product: {},
   filter: {
     success: true,
     products: [],
@@ -17,6 +18,7 @@ const initialState = {
     products: [],
     isLoading: false,
   },
+  isReview: false,
 };
 
 export const ProductSplice = createSlice({
@@ -89,6 +91,26 @@ export const ProductSplice = createSlice({
     setSort: (state, {payload}) => {
       state.filter.isSort = payload.value;
     },
+
+    //review
+    reviewPending: state => {
+      state.isReview = true;
+    },
+    reviewSuccess: (state, {payload}) => {
+      state.isReview = false;
+      const index = state.products.findIndex(
+        x => x._id === payload.response.id,
+      );
+      if (index !== -1) {
+        state.products[index].review = payload.response.review;
+      }
+    },
+
+    //singleProduct
+    singleProduct: (state, {payload}) => {
+      let index = state.products.findIndex(x => x._id === payload.id);
+      state.product = state.products[index];
+    },
   },
 });
 
@@ -106,6 +128,9 @@ export const {
   checkCategory,
   setPriceZone,
   setSort,
+  reviewPending,
+  reviewSuccess,
+  singleProduct,
 } = ProductSplice.actions;
 
 export default ProductSplice.reducer;

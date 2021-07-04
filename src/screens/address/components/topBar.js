@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
+import BackIcon from '../../../assets/images/left.svg';
 
 const {height} = Dimensions.get('window');
 export default function TopBar({title}) {
@@ -19,7 +20,7 @@ export default function TopBar({title}) {
       <TouchableOpacity
         style={styles.IconLeft}
         onPress={() => navigation.goBack()}>
-        <AntDesign name="left" size={25} />
+        <BackIcon />
       </TouchableOpacity>
       <Text style={styles.Title}>{title}</Text>
     </View>
@@ -42,7 +43,12 @@ const styles = StyleSheet.create({
   },
   IconLeft: {
     position: 'absolute',
-    left: 20,
+    left: 0,
+    height: 60,
+    width: 60,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   IconRight: {
     position: 'absolute',

@@ -8,10 +8,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 import {appColor} from '../../assets/color';
 import {addPending} from '../../redux/slice/cartSlice';
+import PlusIcon from '../../assets/images/plus.svg';
+import {singleProduct} from '../../redux/slice/productSplice';
 
 const {width} = Dimensions.get('window');
 const WIDTH_BOX = width / 2 - 25;
@@ -31,14 +33,14 @@ export default function SingleProduct({product}) {
     const parse = product.price - product.price * (product.discount / 100);
     return parseInt(parse, 10);
   };
+
+  const goDetail = () => {
+    var id = product._id;
+    dispatch(singleProduct({id}));
+    navigation.navigate('Detail');
+  };
   return (
-    <TouchableOpacity
-      style={styles.Container}
-      onPress={() =>
-        navigation.navigate('Detail', {
-          product: product,
-        })
-      }>
+    <TouchableOpacity style={styles.Container} onPress={() => goDetail()}>
       <View style={styles.BoxImage}>
         {product.discount > 0 && (
           <View style={styles.DiscountView}>
@@ -70,7 +72,7 @@ export default function SingleProduct({product}) {
         <TouchableOpacity
           style={styles.ButtonAdd}
           onPress={() => addCart(product, 1)}>
-          <Text style={styles.TextButton}>+</Text>
+          <PlusIcon />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>

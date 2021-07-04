@@ -8,12 +8,15 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
 
 import {appColor} from '../../../assets/color';
+import {singleProduct} from '../../../redux/slice/productSplice';
 
 const {width} = Dimensions.get('window');
 
-const SingleItem = props => {
+export default function SingleItem(props) {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const item = props.item;
   const discount = () => {
@@ -27,15 +30,14 @@ const SingleItem = props => {
       item.quantity;
     return parseInt(parse, 10);
   };
+  const goDetail = () => {
+    var id = item.product._id;
+    dispatch(singleProduct({id}));
+    navigation.navigate('Detail');
+  };
 
   return (
-    <TouchableOpacity
-      style={styles.Container}
-      onPress={() =>
-        navigation.navigate('Detail', {
-          product: item.product,
-        })
-      }>
+    <TouchableOpacity style={styles.Container} onPress={() => goDetail()}>
       <Image style={styles.IMG} source={{uri: item.product.image}} />
       <View style={styles.BoxBody}>
         <Text numberOfLines={1} style={styles.Name}>
@@ -63,9 +65,7 @@ const SingleItem = props => {
       </View>
     </TouchableOpacity>
   );
-};
-
-export default SingleItem;
+}
 
 const styles = StyleSheet.create({
   Container: {

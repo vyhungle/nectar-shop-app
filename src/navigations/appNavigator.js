@@ -18,6 +18,8 @@ import Address from '../screens/address';
 import OrderAccepted from '../screens/payment/components/orderAccepted';
 import OrderFail from '../screens/payment/components/orderFail';
 import Bills from '../screens/bill';
+import Review from '../screens/review';
+import AddReview from '../screens/review/addReview';
 
 export default function AppNavigator() {
   const RootStack = createStackNavigator();
@@ -38,6 +40,8 @@ export default function AppNavigator() {
           <RootStack.Screen name="OrderAccepted" component={OrderAccepted} />
           <RootStack.Screen name="OrderFail" component={OrderFail} />
           <RootStack.Screen name="Bills" component={Bills} />
+          <RootStack.Screen name="Review" component={Review} />
+          <RootStack.Screen name="AddReview" component={AddReview} />
         </RootStack.Navigator>
       ) : (
         <RootStack.Navigator

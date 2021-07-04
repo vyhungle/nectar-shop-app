@@ -5,14 +5,13 @@ import TopBar from './components/topBar';
 import ImageTop from './components/ImageTop';
 import Content from './components/content';
 
-export default function Detail({navigation, route}) {
-  const {product} = route.params;
+export default function Detail({navigation}) {
   return (
     <View style={styles.Container}>
       <TopBar />
       <ScrollView>
-        <ImageTop product={product} />
-        <Content product={product} />
+        <ImageTop />
+        <Content />
       </ScrollView>
     </View>
   );

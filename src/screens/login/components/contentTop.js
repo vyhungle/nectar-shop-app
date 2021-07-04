@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Image,
-  ImageBackground,
-} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import {appColor} from '../../../assets/color';
+import IconLogo from '../../../assets/images/iconLogo.svg';
 
 import {VIE} from '../../../assets/language';
 
@@ -16,7 +10,7 @@ const {width, height} = Dimensions.get('window');
 export default function contentTop() {
   return (
     <View style={styles.Container}>
-      <Image source={require('../../../assets/images/logoLogin.png')} />
+      <IconLogo />
       <View style={styles.BoxBottom}>
         <Text style={styles.Title}>{VIE.login.title}</Text>
         <Text style={styles.Hint}>{VIE.login.body}</Text>

@@ -7,9 +7,13 @@ import {
   findPending,
   findSuccess,
   findFail,
+  reviewSuccess,
+  reviewPending,
+  singleProduct,
 } from '../slice/productSplice';
 import axios from 'axios';
 import {apiUrl} from '../constants';
+import * as RootNavigation from '../rootNavigation';
 
 export function* workerSaga() {
   try {
@@ -70,9 +74,30 @@ function* searchProduct(action) {
   }
 }
 
+//Review
+function* RenewSaga(action) {
+  let {payload} = action;
+  let id = payload.values.id;
+  console.log(payload);
+  let {data} = yield call(
+    axios.put,
+    `${apiUrl}/product/review/${id}`,
+    payload.values,
+  );
+
+  let response = {
+    id: id,
+    review: data.review,
+  };
+  yield put({type: reviewSuccess.type, payload: {response: response}});
+  yield put({type: singleProduct.type, payload: {id: id}});
+  RootNavigation.goBack();
+}
+
 function* workerFilter() {
   yield takeEvery(findPending.type, searchProduct);
   yield takeEvery(filterPending.type, filterProduct);
+  yield takeEvery(reviewPending.type, RenewSaga);
 }
 
 export default function* productSaga() {

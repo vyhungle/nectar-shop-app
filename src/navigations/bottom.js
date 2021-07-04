@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
 
 import Home from '../screens/home';
@@ -9,6 +8,16 @@ import Profile from '../screens/menu';
 import Cart from '../screens/cart';
 import Search from '../screens/search';
 import {appColor} from '../assets/color';
+import StoreIcon from '../assets/images/storeBar.svg';
+import StoreIconFocused from '../assets/images/storeBar2.svg';
+import SearchIcon from '../assets/images/searchBar.svg';
+import SearchIconFocused from '../assets/images/searchBar2.svg';
+import CartIcon from '../assets/images/cartBar.svg';
+import CartIconFocused from '../assets/images/cartBar2.svg';
+import LikeIcon from '../assets/images/likeBar.svg';
+import LikeIconFocused from '../assets/images/likeBar2.svg';
+import UserIcon from '../assets/images/userBar.svg';
+import UserIconFocused from '../assets/images/userBar2.svg';
 
 const Bottom = () => {
   const {cart} = useSelector(s => s.cart);
@@ -16,26 +25,38 @@ const Bottom = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) => {
-          let iconName;
+        tabBarIcon: ({focused}) => {
           if (route.name === 'Home') {
-            iconName = focused ? 'storefront' : 'storefront-outline';
+            return focused ? (
+              <StoreIconFocused width={30} height={30} />
+            ) : (
+              <StoreIcon width={30} height={30} />
+            );
           } else if (route.name === 'Search') {
-            iconName = focused ? 'shopping-search' : 'shopping-search';
+            return focused ? (
+              <SearchIconFocused width={30} height={30} />
+            ) : (
+              <SearchIcon width={30} height={30} />
+            );
           } else if (route.name === 'Like') {
-            iconName = focused ? 'heart' : 'heart-outline';
+            return focused ? (
+              <LikeIconFocused width={30} height={30} />
+            ) : (
+              <LikeIcon width={30} height={30} />
+            );
           } else if (route.name === 'Account') {
-            iconName = focused ? 'account-circle' : 'account-circle-outline';
+            return focused ? (
+              <UserIconFocused width={30} height={30} />
+            ) : (
+              <UserIcon width={30} height={30} />
+            );
           } else {
-            iconName = focused ? 'shopping' : 'shopping-outline';
+            return focused ? (
+              <CartIconFocused width={30} height={30} />
+            ) : (
+              <CartIcon width={30} height={30} />
+            );
           }
-          return (
-            <IconMaterialCommunityIcons
-              name={iconName}
-              size={30}
-              color={color}
-            />
-          );
         },
       })}
       tabBarOptions={{
@@ -60,7 +81,7 @@ const Bottom = () => {
           tabBarBadgeStyle: {
             position: 'absolute',
             top: 15,
-            left: 11,
+            left: 15,
             fontFamily: 'SVN-Gilroy Bold',
             display: 'flex',
             alignItems: 'center',

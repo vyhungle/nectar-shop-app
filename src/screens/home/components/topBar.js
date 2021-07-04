@@ -1,14 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {appColor} from '../../../assets/color';
+import IconLogo from '../../../assets/images/logoHome.svg';
 
 export default function topBar() {
   return (
     <View style={styles.Container}>
-      <Image
-        source={require('../../../assets/images/logoLogin.png')}
-        style={styles.Img}
-      />
+      <IconLogo />
       <Text style={styles.Title}>Nectar Shop</Text>
     </View>
   );
