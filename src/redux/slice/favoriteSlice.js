@@ -22,10 +22,13 @@ const favoriteSlice = createSlice({
     },
     likeFavoriteSuccess: (state, {payload}) => {
       state.isLoading = false;
-      if (payload.like) {
-        state.favorites.push(payload.response.product);
+      if (payload.data.like) {
+        state.favorites.products.push({
+          product: payload.data.response.product,
+          createdAt: payload.data.response.createdAt,
+        });
       } else {
-        state.favorites.splice(payload.response.index, 1);
+        state.favorites.products.splice(payload.data.response.index, 1);
       }
     },
   },

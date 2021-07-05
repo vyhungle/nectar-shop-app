@@ -36,7 +36,7 @@ export default function ContentSheet(props) {
     };
     dispatch(filterPending({value}));
     props.current.close();
-    navigation.navigate('Filter');
+    navigation.navigate('Filter', {title: 'Sản phẩm'});
   };
   return (
     <KeyboardAwareScrollView style={styles.Container}>

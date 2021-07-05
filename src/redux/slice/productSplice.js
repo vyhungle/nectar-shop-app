@@ -3,6 +3,8 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
   isLoading: true,
   products: [],
+  bestSeller: [],
+  offer: [],
   product: {},
   filter: {
     success: true,
@@ -32,6 +34,8 @@ export const ProductSplice = createSlice({
     productsSuccess: (state, {payload}) => {
       state.isLoading = false;
       state.products = payload.products;
+      state.offer = payload.products.filter(x => x.discount > 0);
+      state.bestSeller = payload.products.filter(x => x.sellNumber > 5);
     },
     productsFail: state => {
       state.isLoading = false;

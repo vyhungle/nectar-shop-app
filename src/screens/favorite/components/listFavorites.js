@@ -12,7 +12,7 @@ export default function ListFavorites() {
       keyExtractor={(item, index) => index}
       renderItem={item => <SingleFavorite product={item.item.product} />}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{paddingBottom: 80}}
+      contentContainerStyle={{paddingBottom: 150}}
     />
   );
 }

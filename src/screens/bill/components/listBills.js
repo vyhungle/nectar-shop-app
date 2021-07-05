@@ -47,7 +47,7 @@ const ListBills = () => {
 
           <View style={styles.StatusBox}>
             <Text style={styles.DateText}>
-              Ngày đặt: {moment(e.createdAt).add('days').calendar()}
+              Ngày đặt: {moment(e.createdAt).format('DD/MM/YYYY')}
             </Text>
             {renderStatus(e.status)}
           </View>

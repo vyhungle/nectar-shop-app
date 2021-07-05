@@ -7,19 +7,26 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import SearchIcon from '../../../assets/images/search.svg';
-
 import {appColor} from '../../../assets/color';
 
 const {width, height} = Dimensions.get('window');
 
 export default function SearchForm(props) {
+  const navigation = useNavigation();
   const myTextInput = React.createRef();
   const clearText = () => {
     myTextInput.current.clear();
   };
 
+  const submitInput = value => {
+    navigation.navigate('Search', {
+      key: value,
+    });
+  };
   return (
     <View style={styles.Container}>
       <View style={styles.IconField}>
@@ -30,6 +37,7 @@ export default function SearchForm(props) {
         placeholder="Tìm kiếm.."
         placeholderTextColor={appColor.hint}
         ref={myTextInput}
+        onSubmitEditing={event => submitInput(event.nativeEvent.text)}
       />
       <TouchableOpacity style={styles.IconClear} onPress={() => clearText()}>
         <AntDesign name="closecircle" size={20} color={appColor.buttonX} />

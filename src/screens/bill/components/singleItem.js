@@ -69,7 +69,7 @@ export default function SingleItem(props) {
 
 const styles = StyleSheet.create({
   Container: {
-    height: 70,
+    height: 90,
     borderBottomWidth: 0.7,
     borderBottomColor: appColor.border,
     display: 'flex',

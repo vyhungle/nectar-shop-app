@@ -52,6 +52,7 @@ export default function Content() {
     navigation.navigate('Review');
     dispatch(singleProduct({id}));
   };
+
   return (
     <View style={styles.Container}>
       <Text style={styles.TextName}>{product.name}</Text>
