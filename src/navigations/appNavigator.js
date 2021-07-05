@@ -20,7 +20,6 @@ import OrderFail from '../screens/payment/components/orderFail';
 import Bills from '../screens/bill';
 import Review from '../screens/review';
 import AddReview from '../screens/review/addReview';
-
 export default function AppNavigator() {
   const RootStack = createStackNavigator();
   const {isAuth} = useSelector(s => s.auth);

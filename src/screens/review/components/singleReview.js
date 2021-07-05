@@ -7,7 +7,6 @@ import 'moment/locale/vi';
 moment.locale('vi');
 
 export default function singleReview({content}) {
-  console.log(content);
   return (
     <View style={styles.Container}>
       <View style={styles.BoxTop}>

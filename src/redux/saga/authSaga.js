@@ -24,6 +24,7 @@ import {
 } from '../slice/authSlice';
 import {getCartSaga} from './cartSaga';
 import {billsPending} from '../slice/cartSlice';
+import {favoritePending} from '../slice/favoriteSlice';
 
 function* getUser() {
   var token = yield call(getAccessToken);
@@ -35,6 +36,7 @@ function* getUser() {
       var user = data.user;
       yield put({type: authUser.type, payload: {user: user}});
       yield put({type: billsPending.type});
+      yield put({type: favoritePending.type});
     }
   } else yield call(setAuthToken, null);
 }
@@ -111,5 +113,6 @@ function* workerProductSaga() {
 }
 
 export default function* productSaga() {
+  console.log('authSaga active');
   yield all([getUser(), workerProductSaga()]);
 }

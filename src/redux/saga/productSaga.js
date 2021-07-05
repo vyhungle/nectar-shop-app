@@ -101,6 +101,6 @@ function* workerFilter() {
 }
 
 export default function* productSaga() {
-  console.log('product saga');
+  console.log('productSaga active');
   yield all([workerSaga(), workerFilter()]);
 }

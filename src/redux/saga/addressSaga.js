@@ -51,6 +51,6 @@ function* addressWorker() {
 }
 
 export default function* addressSaga() {
-  console.log('address saga running');
+  console.log('addressSaga active');
   yield all([getCity(), addressWorker()]);
 }

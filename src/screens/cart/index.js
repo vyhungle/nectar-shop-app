@@ -15,7 +15,7 @@ export default function Index() {
     <View style={styles.Container}>
       {isPayment && <Loading />}
       <TopTab title="Giỏ hàng" />
-      <View style={styles.Container}>
+      <View style={styles.BoxContainer}>
         <ListItem />
         <ButtonCheckout />
       </View>
@@ -27,7 +27,10 @@ const styles = StyleSheet.create({
   Container: {
     backgroundColor: 'white',
     flex: 1,
+  },
+  BoxContainer: {
     borderTopColor: appColor.border,
     borderTopWidth: 1,
+    flex: 1,
   },
 });

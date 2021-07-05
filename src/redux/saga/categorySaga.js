@@ -14,6 +14,6 @@ function* getCategories() {
 // function* workerCategory() {}
 
 export default function* CategorySaga() {
-  console.log('category saga');
+  console.log('categorySaga active');
   yield all([getCategories()]);
 }

@@ -6,6 +6,7 @@ import authReducer from './slice/authSlice';
 import categoryReducer from './slice/categorySlice';
 import cartReducer from './slice/cartSlice';
 import addressReducer from './slice/addressSlice';
+import favoriteReducer from './slice/favoriteSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -16,6 +17,7 @@ export const store = configureStore({
     categories: categoryReducer,
     cart: cartReducer,
     address: addressReducer,
+    favorite: favoriteReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(sagaMiddleware),

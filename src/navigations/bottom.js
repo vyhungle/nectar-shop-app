@@ -7,6 +7,7 @@ import Home from '../screens/home';
 import Profile from '../screens/menu';
 import Cart from '../screens/cart';
 import Search from '../screens/search';
+import Favorite from '../screens/favorite';
 import {appColor} from '../assets/color';
 import StoreIcon from '../assets/images/storeBar.svg';
 import StoreIconFocused from '../assets/images/storeBar2.svg';
@@ -89,7 +90,7 @@ const Bottom = () => {
           },
         }}
       />
-      <Tab.Screen name="Like" component={Cart} />
+      <Tab.Screen name="Like" component={Favorite} />
       <Tab.Screen name="Account" component={Profile} />
     </Tab.Navigator>
   );
