@@ -29,6 +29,9 @@ Ios: npx react-native run-ios || yarn run ios
 ### `Giỏ hàng`
 <img src="https://user-images.githubusercontent.com/72851530/125149802-52153480-e165-11eb-91ea-9ce455e7425b.jpg" width="40%" >
 
+### `Đơn đặt hàng`
+<img src="https://user-images.githubusercontent.com/72851530/125149986-98b75e80-e166-11eb-91f2-84839e48c08d.jpg" width="40%" >
+
 ### `Yêu thích`
 <img src="https://user-images.githubusercontent.com/72851530/125149818-74a74d80-e165-11eb-8b58-b4066c977fe9.jpg" width="40%" >
 
